@@ -244,12 +244,20 @@ def get_active_incidents(db: Session = Depends(get_db)):
             w.ward_id,
             w.name AS ward,
             i.affected_population,
+
+            ST_Y(i.geometry) AS latitude,
+            ST_X(i.geometry) AS longitude,
+
             wl.water_level_m
+
         FROM incidents i
-        JOIN hotspots h
+
+        LEFT JOIN hotspots h
             ON i.hotspot_id = h.hotspot_id
-        JOIN wards w
+
+        LEFT JOIN wards w
             ON h.ward_id = w.ward_id
+
         LEFT JOIN LATERAL (
             SELECT water_level_m
             FROM water_levels
@@ -257,13 +265,16 @@ def get_active_incidents(db: Session = Depends(get_db)):
             ORDER BY timestamp DESC
             LIMIT 1
         ) wl ON TRUE
+
         WHERE i.status = 'ACTIVE'
+
         ORDER BY
             CASE i.severity
                 WHEN 'CRITICAL' THEN 1
                 WHEN 'HIGH' THEN 2
                 WHEN 'MODERATE' THEN 3
                 WHEN 'LOW' THEN 4
+                ELSE 5
             END,
             i.affected_population DESC;
     """)
@@ -279,6 +290,8 @@ def get_active_incidents(db: Session = Depends(get_db)):
             "ward": row["ward"],
             "waterLevel": row["water_level_m"],
             "affectedPopulation": row["affected_population"],
+            "latitude": row["latitude"],
+            "longitude": row["longitude"],
         })
 
     return incidents
