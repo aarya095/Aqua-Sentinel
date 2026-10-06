@@ -1,42 +1,34 @@
-                                            Table "public.citizen_reports"
-   Column    |            Type             | Collation | Nullable |                      Default                       
--------------+-----------------------------+-----------+----------+----------------------------------------------------
- report_id   | bigint                      |           | not null | nextval('citizen_reports_report_id_seq'::regclass)
- hotspot_id  | integer                     |           |          | 
- timestamp   | timestamp without time zone |           | not null | 
- description | text                        |           |          | 
- severity    | character varying(20)       |           |          | 
- confidence  | numeric(4,2)                |           |          | 
- status      | character varying(20)       |           |          | 
- geometry    | geometry(Point,4326)        |           |          | 
+Table "public.citizen_reports"
+   Column    |            Type             | Collation | Nullable |                      Default                       | Storage  | Compression | Stats target | Description
+-------------+-----------------------------+-----------+----------+----------------------------------------------------+----------+-------------+--------------+-------------
+ report_id   | bigint                      |           | not null | nextval('citizen_reports_report_id_seq'::regclass) | plain    |             |              |
+ hotspot_id  | integer                     |           |          |                                                    | plain    |             |              |
+ timestamp   | timestamp without time zone |           | not null |                                                    | plain    |             |              |
+ description | text                        |           |          |                                                    | extended |             |              |
+ severity    | character varying(20)       |           |          |                                                    | extended |             |              |
+ confidence  | numeric(4,2)                |           |          |                                                    | main     |             |              |
+ status      | character varying(20)       |           |          |                                                    | extended |             |              |
+ geometry    | geometry(Point,4326)        |           |          |                                                    | main     |             |              |
 Indexes:
     "citizen_reports_pkey" PRIMARY KEY, btree (report_id)
 Foreign-key constraints:
     "citizen_reports_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
+Not-null constraints:
+    "citizen_reports_report_id_not_null" NOT NULL "report_id"
+    "citizen_reports_timestamp_not_null" NOT NULL "timestamp"
+Access method: heap
 
-  Index "public.citizen_reports_pkey"
-  Column   |  Type  | Key? | Definition 
------------+--------+------+------------
- report_id | bigint | yes  | report_id
-primary key, btree, for table "public.citizen_reports"
-
-               Sequence "public.citizen_reports_report_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.citizen_reports.report_id
-
-                                            Table "public.drainage"
-       Column       |         Type          | Collation | Nullable |                  Default                   
---------------------+-----------------------+-----------+----------+--------------------------------------------
- drain_id           | integer               |           | not null | nextval('drainage_drain_id_seq'::regclass)
- drain_code         | character varying(20) |           | not null | 
- ward_id            | integer               |           |          | 
- drain_type         | character varying(30) |           |          | 
- capacity_m3_hr     | numeric(10,2)         |           |          | 
- condition          | character varying(20) |           |          | 
- blocked_percentage | numeric(5,2)          |           |          | 
- current_flow_m3_hr | numeric(10,2)         |           |          | 
+Table "public.drainage"
+       Column       |         Type          | Collation | Nullable |                  Default                   | Storage  | Compression | Stats target | Description
+--------------------+-----------------------+-----------+----------+--------------------------------------------+----------+-------------+--------------+-------------
+ drain_id           | integer               |           | not null | nextval('drainage_drain_id_seq'::regclass) | plain    |             |              |
+ drain_code         | character varying(20) |           | not null |                                            | extended |             |              |
+ ward_id            | integer               |           |          |                                            | plain    |             |              |
+ drain_type         | character varying(30) |           |          |                                            | extended |             |              |
+ capacity_m3_hr     | numeric(10,2)         |           |          |                                            | main     |             |              |
+ condition          | character varying(20) |           |          |                                            | extended |             |              |
+ blocked_percentage | numeric(5,2)          |           |          |                                            | main     |             |              |
+ current_flow_m3_hr | numeric(10,2)         |           |          |                                            | main     |             |              |
 Indexes:
     "drainage_pkey" PRIMARY KEY, btree (drain_id)
     "drainage_drain_code_key" UNIQUE CONSTRAINT, btree (drain_code)
@@ -45,101 +37,46 @@ Foreign-key constraints:
 Referenced by:
     TABLE "hotspots" CONSTRAINT "hotspots_drain_id_fkey" FOREIGN KEY (drain_id) REFERENCES drainage(drain_id)
     TABLE "road_drainage" CONSTRAINT "road_drainage_drain_id_fkey" FOREIGN KEY (drain_id) REFERENCES drainage(drain_id)
+Not-null constraints:
+    "drainage_drain_id_not_null" NOT NULL "drain_id"
+    "drainage_drain_code_not_null" NOT NULL "drain_code"
+Access method: heap
 
-         Index "public.drainage_drain_code_key"
-   Column   |         Type          | Key? | Definition 
-------------+-----------------------+------+------------
- drain_code | character varying(20) | yes  | drain_code
-unique, btree, for table "public.drainage"
-
-               Sequence "public.drainage_drain_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.drainage.drain_id
-
-      Index "public.drainage_pkey"
-  Column  |  Type   | Key? | Definition 
-----------+---------+------+------------
- drain_id | integer | yes  | drain_id
-primary key, btree, for table "public.drainage"
-
-                                            Table "public.facilities"
-    Column     |          Type          | Collation | Nullable |                     Default                     
----------------+------------------------+-----------+----------+-------------------------------------------------
- facility_id   | integer                |           | not null | nextval('facilities_facility_id_seq'::regclass)
- facility_code | character varying(20)  |           | not null | 
- name          | character varying(100) |           | not null | 
- facility_type | character varying(30)  |           |          | 
- ward_id       | integer                |           |          | 
- priority      | character varying(20)  |           |          | 
- capacity      | integer                |           |          | 
- geometry      | geometry(Point,4326)   |           |          | 
+Table "public.facilities"
+    Column     |          Type          | Collation | Nullable |                     Default                     | Storage  | Compression | Stats target | Description
+---------------+------------------------+-----------+----------+-------------------------------------------------+----------+-------------+--------------+-------------
+ facility_id   | integer                |           | not null | nextval('facilities_facility_id_seq'::regclass) | plain    |             |              |
+ facility_code | character varying(20)  |           | not null |                                                 | extended |             |              |
+ name          | character varying(100) |           | not null |                                                 | extended |             |              |
+ facility_type | character varying(30)  |           |          |                                                 | extended |             |              |
+ ward_id       | integer                |           |          |                                                 | plain    |             |              |
+ priority      | character varying(20)  |           |          |                                                 | extended |             |              |
+ capacity      | integer                |           |          |                                                 | plain    |             |              |
+ geometry      | geometry(Point,4326)   |           |          |                                                 | main     |             |              |
 Indexes:
     "facilities_pkey" PRIMARY KEY, btree (facility_id)
     "facilities_facility_code_key" UNIQUE CONSTRAINT, btree (facility_code)
 Foreign-key constraints:
     "facilities_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
-Referenced by:
-    TABLE "response_actions" CONSTRAINT "response_actions_facility_id_fkey" FOREIGN KEY (facility_id) REFERENCES facilities(facility_id)
+Not-null constraints:
+    "facilities_facility_id_not_null" NOT NULL "facility_id"
+    "facilities_facility_code_not_null" NOT NULL "facility_code"
+    "facilities_name_not_null" NOT NULL "name"
+Access method: heap
 
-         Index "public.facilities_facility_code_key"
-    Column     |         Type          | Key? |  Definition   
----------------+-----------------------+------+---------------
- facility_code | character varying(20) | yes  | facility_code
-unique, btree, for table "public.facilities"
+(END)
 
-             Sequence "public.facilities_facility_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.facilities.facility_id
-
-       Index "public.facilities_pkey"
-   Column    |  Type   | Key? | Definition  
--------------+---------+------+-------------
- facility_id | integer | yes  | facility_id
-primary key, btree, for table "public.facilities"
-
-                View "public.geography_columns"
-       Column       |  Type   | Collation | Nullable | Default 
---------------------+---------+-----------+----------+---------
- f_table_catalog    | name    |           |          | 
- f_table_schema     | name    |           |          | 
- f_table_name       | name    |           |          | 
- f_geography_column | name    |           |          | 
- coord_dimension    | integer |           |          | 
- srid               | integer |           |          | 
- type               | text    |           |          | 
-
-                       View "public.geometry_columns"
-      Column       |          Type          | Collation | Nullable | Default 
--------------------+------------------------+-----------+----------+---------
- f_table_catalog   | character varying(256) | C         |          | 
- f_table_schema    | name                   |           |          | 
- f_table_name      | name                   |           |          | 
- f_geometry_column | name                   |           |          | 
- coord_dimension   | integer                |           |          | 
- srid              | integer                |           |          | 
- type              | character varying(30)  |           |          | 
-
-        Composite type "public.geometry_dump"
- Column |   Type    | Collation | Nullable | Default 
---------+-----------+-----------+----------+---------
- path   | integer[] |           |          | 
- geom   | geometry  |           |          | 
-
-                                              Table "public.hotspots"
-       Column        |         Type          | Collation | Nullable |                   Default                    
----------------------+-----------------------+-----------+----------+----------------------------------------------
- hotspot_id          | integer               |           | not null | nextval('hotspots_hotspot_id_seq'::regclass)
- hotspot_code        | character varying(20) |           | not null | 
- ward_id             | integer               |           |          | 
- road_id             | integer               |           |          | 
- drain_id            | integer               |           |          | 
- elevation_m         | numeric(6,2)          |           |          | 
- historical_severity | character varying(20) |           |          | 
- geometry            | geometry(Point,4326)  |           |          | 
+Table "public.hotspots"
+       Column        |         Type          | Collation | Nullable |                   Default                    | Storage  | Compression | Stats target | Description
+---------------------+-----------------------+-----------+----------+----------------------------------------------+----------+-------------+--------------+-------------
+ hotspot_id          | integer               |           | not null | nextval('hotspots_hotspot_id_seq'::regclass) | plain    |             |              |
+ hotspot_code        | character varying(20) |           | not null |                                              | extended |             |              |
+ ward_id             | integer               |           |          |                                              | plain    |             |              |
+ road_id             | integer               |           |          |                                              | plain    |             |              |
+ drain_id            | integer               |           |          |                                              | plain    |             |              |
+ elevation_m         | numeric(6,2)          |           |          |                                              | main     |             |              |
+ historical_severity | character varying(20) |           |          |                                              | extended |             |              |
+ geometry            | geometry(Point,4326)  |           |          |                                              | main     |             |              |
 Indexes:
     "hotspots_pkey" PRIMARY KEY, btree (hotspot_id)
     "hotspots_hotspot_code_key" UNIQUE CONSTRAINT, btree (hotspot_code)
@@ -151,102 +88,26 @@ Referenced by:
     TABLE "citizen_reports" CONSTRAINT "citizen_reports_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
     TABLE "incidents" CONSTRAINT "incidents_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
     TABLE "water_levels" CONSTRAINT "water_levels_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
+Not-null constraints:
+    "hotspots_hotspot_id_not_null" NOT NULL "hotspot_id"
+"hotspots_hotspot_code_not_null" NOT NULL "hotspot_code"
+Access method: heap
 
-          Index "public.hotspots_hotspot_code_key"
-    Column    |         Type          | Key? |  Definition  
---------------+-----------------------+------+--------------
- hotspot_code | character varying(20) | yes  | hotspot_code
-unique, btree, for table "public.hotspots"
-
-              Sequence "public.hotspots_hotspot_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.hotspots.hotspot_id
-
-       Index "public.hotspots_pkey"
-   Column   |  Type   | Key? | Definition 
-------------+---------+------+------------
- hotspot_id | integer | yes  | hotspot_id
-primary key, btree, for table "public.hotspots"
-
-                                             Table "public.human_decisions"
-   Column    |            Type             | Collation | Nullable |                       Default                        
--------------+-----------------------------+-----------+----------+------------------------------------------------------
- decision_id | bigint                      |           | not null | nextval('human_decisions_decision_id_seq'::regclass)
- plan_id     | bigint                      |           | not null | 
- decision    | character varying(20)       |           | not null | 
- reason      | text                        |           |          | 
- decided_at  | timestamp without time zone |           | not null | CURRENT_TIMESTAMP
-Indexes:
-    "human_decisions_pkey" PRIMARY KEY, btree (decision_id)
-    "idx_human_decisions_plan_id" btree (plan_id)
-Check constraints:
-    "human_decisions_decision_check" CHECK (decision::text = ANY (ARRAY['APPROVED'::character varying, 'MODIFIED'::character varying, 'REJECTED'::character varying]::text[]))
-Foreign-key constraints:
-    "human_decisions_plan_id_fkey" FOREIGN KEY (plan_id) REFERENCES response_plans(plan_id)
-
-              Sequence "public.human_decisions_decision_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.human_decisions.decision_id
-
-    Index "public.human_decisions_pkey"
-   Column    |  Type  | Key? | Definition  
--------------+--------+------+-------------
- decision_id | bigint | yes  | decision_id
-primary key, btree, for table "public.human_decisions"
-
-Index "public.idx_human_decisions_plan_id"
- Column  |  Type  | Key? | Definition 
----------+--------+------+------------
- plan_id | bigint | yes  | plan_id
-btree, for table "public.human_decisions"
-
- Index "public.idx_incidents_hotspot_id"
-   Column   |  Type   | Key? | Definition 
-------------+---------+------+------------
- hotspot_id | integer | yes  | hotspot_id
-btree, for table "public.incidents"
-
-        Index "public.idx_incidents_status"
- Column |         Type          | Key? | Definition 
---------+-----------------------+------+------------
- status | character varying(20) | yes  | status
-btree, for table "public.incidents"
-
-Index "public.idx_response_actions_plan_id"
- Column  |  Type  | Key? | Definition 
----------+--------+------+------------
- plan_id | bigint | yes  | plan_id
-btree, for table "public.response_actions"
-
-         Index "public.idx_response_plans_created_at"
-   Column   |            Type             | Key? | Definition 
-------------+-----------------------------+------+------------
- created_at | timestamp without time zone | yes  | created_at
-btree, for table "public.response_plans"
-
-Index "public.idx_response_plans_incident_id"
-   Column    |  Type  | Key? | Definition  
--------------+--------+------+-------------
- incident_id | bigint | yes  | incident_id
-btree, for table "public.response_plans"
-
-                                                 Table "public.incidents"
-       Column        |            Type             | Collation | Nullable |                    Default                     
----------------------+-----------------------------+-----------+----------+------------------------------------------------
- incident_id         | bigint                      |           | not null | nextval('incidents_incident_id_seq'::regclass)
- hotspot_id          | integer                     |           |          | 
- started_at          | timestamp without time zone |           | not null | 
- ended_at            | timestamp without time zone |           |          | 
- status              | character varying(20)       |           | not null | 'ACTIVE'::character varying
- severity            | character varying(20)       |           |          | 
- affected_population | integer                     |           |          | 
- created_at          | timestamp without time zone |           | not null | CURRENT_TIMESTAMP
+Table "public.incidents"
+       Column        |            Type             | Collation | Nullable |                    Default                     | Storage  | Compression | Stats target | Description
+---------------------+-----------------------------+-----------+----------+------------------------------------------------+----------+-------------+--------------+-------------
+ incident_id         | bigint                      |           | not null | nextval('incidents_incident_id_seq'::regclass) | plain    |             |              |
+ hotspot_id          | integer                     |           |          |                                                | plain    |             |              |
+ started_at          | timestamp without time zone |           | not null |                                                | plain    |             |              |
+ ended_at            | timestamp without time zone |           |          |                                                | plain    |             |              |
+ status              | character varying(20)       |           | not null | 'ACTIVE'::character varying                    | extended |             |              |
+ severity            | character varying(20)       |           |          |                                                | extended |             |              |
+ affected_population | integer                     |           |          |                                                | plain    |             |              |
+ created_at          | timestamp without time zone |           | not null | CURRENT_TIMESTAMP                              | plain    |             |              |
+ geometry            | geometry(Point,4326)        |           |          |                                                | main     |             |              |
 Indexes:
     "incidents_pkey" PRIMARY KEY, btree (incident_id)
+    "idx_incidents_geometry" gist (geometry)
     "idx_incidents_hotspot_id" btree (hotspot_id)
     "idx_incidents_status" btree (status)
 Check constraints:
@@ -254,246 +115,116 @@ Check constraints:
     "incidents_status_check" CHECK (status::text = ANY (ARRAY['ACTIVE'::character varying, 'RESOLVED'::character varying, 'CLOSED'::character varying]::text[]))
 Foreign-key constraints:
     "incidents_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
-Referenced by:
-    TABLE "response_plans" CONSTRAINT "response_plans_incident_id_fkey" FOREIGN KEY (incident_id) REFERENCES incidents(incident_id)
+Not-null constraints:
+    "incidents_incident_id_not_null" NOT NULL "incident_id"
+    "incidents_started_at_not_null" NOT NULL "started_at"
+    "incidents_status_not_null" NOT NULL "status"
+    "incidents_created_at_not_null" NOT NULL "created_at"
+Access method: heap
 
-                 Sequence "public.incidents_incident_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.incidents.incident_id
-
-       Index "public.incidents_pkey"
-   Column    |  Type  | Key? | Definition  
--------------+--------+------+-------------
- incident_id | bigint | yes  | incident_id
-primary key, btree, for table "public.incidents"
-
-                                               Table "public.intersections"
-      Column       |         Type          | Collation | Nullable |                        Default                         
--------------------+-----------------------+-----------+----------+--------------------------------------------------------
- intersection_id   | integer               |           | not null | nextval('intersections_intersection_id_seq'::regclass)
- intersection_code | character varying(20) |           | not null | 
- ward_id           | integer               |           |          | 
- geometry          | geometry(Point,4326)  |           |          | 
+Table "public.intersections"
+      Column       |         Type          | Collation | Nullable |                        Default                         | Storage  | Compression | Stats target | Description
+-------------------+-----------------------+-----------+----------+--------------------------------------------------------+----------+-------------+--------------+-------------
+ intersection_id   | integer               |           | not null | nextval('intersections_intersection_id_seq'::regclass) | plain    |             |              |
+ intersection_code | character varying(20) |           | not null |                                                        | extended |             |              |
+ ward_id           | integer               |           |          |                                                        | plain    |             |              |
+ geometry          | geometry(Point,4326)  |           |          |                                                        | main     |             |              |
 Indexes:
     "intersections_pkey" PRIMARY KEY, btree (intersection_id)
     "intersections_intersection_code_key" UNIQUE CONSTRAINT, btree (intersection_code)
 Foreign-key constraints:
     "intersections_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
+Not-null constraints:
+    "intersections_intersection_id_not_null" NOT NULL "intersection_id"
+    "intersections_intersection_code_not_null" NOT NULL "intersection_code"
+Access method: heap
 
-          Index "public.intersections_intersection_code_key"
-      Column       |         Type          | Key? |    Definition     
--------------------+-----------------------+------+-------------------
- intersection_code | character varying(20) | yes  | intersection_code
-unique, btree, for table "public.intersections"
-
-         Sequence "public.intersections_intersection_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.intersections.intersection_id
-
-         Index "public.intersections_pkey"
-     Column      |  Type   | Key? |   Definition    
------------------+---------+------+-----------------
- intersection_id | integer | yes  | intersection_id
-primary key, btree, for table "public.intersections"
-
-                                          Table "public.pumps"
-     Column      |         Type          | Collation | Nullable |                Default                 
------------------+-----------------------+-----------+----------+----------------------------------------
- pump_id         | integer               |           | not null | nextval('pumps_pump_id_seq'::regclass)
- pump_code       | character varying(20) |           | not null | 
- capacity_m3_hr  | numeric(10,2)         |           |          | 
- status          | character varying(20) |           |          | 
- current_ward_id | integer               |           |          | 
- geometry        | geometry(Point,4326)  |           |          | 
+Table "public.pumps"
+     Column      |         Type          | Collation | Nullable |                Default                 | Storage  | Compression | Stats target | Description
+-----------------+-----------------------+-----------+----------+----------------------------------------+----------+-------------+--------------+-------------
+ pump_id         | integer               |           | not null | nextval('pumps_pump_id_seq'::regclass) | plain    |             |              |
+ pump_code       | character varying(20) |           | not null |                                        | extended |             |              |
+ capacity_m3_hr  | numeric(10,2)         |           |          |                                        | main     |             |              |
+ status          | character varying(20) |           |          |                                        | extended |             |              |
+ current_ward_id | integer               |           |          |                                        | plain    |             |              |
+ geometry        | geometry(Point,4326)  |           |          |                                        | main     |             |              |
 Indexes:
     "pumps_pkey" PRIMARY KEY, btree (pump_id)
     "pumps_pump_code_key" UNIQUE CONSTRAINT, btree (pump_code)
 Foreign-key constraints:
     "pumps_current_ward_id_fkey" FOREIGN KEY (current_ward_id) REFERENCES wards(ward_id)
-Referenced by:
-    TABLE "response_actions" CONSTRAINT "response_actions_pump_id_fkey" FOREIGN KEY (pump_id) REFERENCES pumps(pump_id)
+Not-null constraints:
+    "pumps_pump_id_not_null" NOT NULL "pump_id"
+    "pumps_pump_code_not_null" NOT NULL "pump_code"
+Access method: heap
 
-       Index "public.pumps_pkey"
- Column  |  Type   | Key? | Definition 
----------+---------+------+------------
- pump_id | integer | yes  | pump_id
-primary key, btree, for table "public.pumps"
-
-          Index "public.pumps_pump_code_key"
-  Column   |         Type          | Key? | Definition 
------------+-----------------------+------+------------
- pump_code | character varying(20) | yes  | pump_code
-unique, btree, for table "public.pumps"
-
-                 Sequence "public.pumps_pump_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.pumps.pump_id
-
-                                               Table "public.rainfall"
-     Column     |            Type             | Collation | Nullable |                    Default                    
-----------------+-----------------------------+-----------+----------+-----------------------------------------------
- rainfall_id    | bigint                      |           | not null | nextval('rainfall_rainfall_id_seq'::regclass)
- ward_id        | integer                     |           |          | 
- timestamp      | timestamp without time zone |           | not null | 
- rainfall_mm_hr | numeric(8,2)                |           |          | 
- source         | character varying(30)       |           |          | 
+Table "public.rainfall"
+     Column     |            Type             | Collation | Nullable |                    Default                    | Storage  | Compression | Stats target | Description
+----------------+-----------------------------+-----------+----------+-----------------------------------------------+----------+-------------+--------------+-------------
+ rainfall_id    | bigint                      |           | not null | nextval('rainfall_rainfall_id_seq'::regclass) | plain    |             |              |
+ ward_id        | integer                     |           |          |                                               | plain    |             |              |
+ timestamp      | timestamp without time zone |           | not null |                                               | plain    |             |              |
+ rainfall_mm_hr | numeric(8,2)                |           |          |                                               | main     |             |              |
+ source         | character varying(30)       |           |          |                                               | extended |             |              |
 Indexes:
     "rainfall_pkey" PRIMARY KEY, btree (rainfall_id)
 Foreign-key constraints:
     "rainfall_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
+Not-null constraints:
+    "rainfall_rainfall_id_not_null" NOT NULL "rainfall_id"
+    "rainfall_timestamp_not_null" NOT NULL "timestamp"
+Access method: heap
 
-       Index "public.rainfall_pkey"
-   Column    |  Type  | Key? | Definition  
--------------+--------+------+-------------
- rainfall_id | bigint | yes  | rainfall_id
-primary key, btree, for table "public.rainfall"
-
-                  Sequence "public.rainfall_rainfall_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.rainfall.rainfall_id
-
-                                             Table "public.response_actions"
-       Column       |         Type          | Collation | Nullable |                       Default                       
---------------------+-----------------------+-----------+----------+-----------------------------------------------------
- action_id          | bigint                |           | not null | nextval('response_actions_action_id_seq'::regclass)
- plan_id            | bigint                |           | not null | 
- action_type        | character varying(40) |           | not null | 
- pump_id            | integer               |           |          | 
- team_id            | integer               |           |          | 
- road_id            | integer               |           |          | 
- facility_id        | integer               |           |          | 
- target_description | text                  |           |          | 
- action_status      | character varying(20) |           | not null | 'RECOMMENDED'::character varying
-Indexes:
-    "response_actions_pkey" PRIMARY KEY, btree (action_id)
-    "idx_response_actions_plan_id" btree (plan_id)
-Check constraints:
-    "response_actions_status_check" CHECK (action_status::text = ANY (ARRAY['RECOMMENDED'::character varying, 'APPROVED'::character varying, 'MODIFIED'::character varying, 'REJECTED'::character varying, 'EXECUTED'::character varying, 'CANCELLED'::character varying]::text[]))
-    "response_actions_type_check" CHECK (action_type::text = ANY (ARRAY['ALLOCATE_PUMP'::character varying, 'ALLOCATE_TEAM'::character varying, 'REALLOCATE_RESOURCE'::character varying, 'TRAFFIC_DIVERSION'::character varying, 'PROTECT_FACILITY'::character varying, 'CONTINUE_MONITORING'::character varying, 'DEESCALATE'::character varying]::text[]))
-Foreign-key constraints:
-    "response_actions_facility_id_fkey" FOREIGN KEY (facility_id) REFERENCES facilities(facility_id)
-    "response_actions_plan_id_fkey" FOREIGN KEY (plan_id) REFERENCES response_plans(plan_id) ON DELETE CASCADE
-    "response_actions_pump_id_fkey" FOREIGN KEY (pump_id) REFERENCES pumps(pump_id)
-    "response_actions_road_id_fkey" FOREIGN KEY (road_id) REFERENCES roads(road_id)
-    "response_actions_team_id_fkey" FOREIGN KEY (team_id) REFERENCES response_teams(team_id)
-
-               Sequence "public.response_actions_action_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.response_actions.action_id
-
-  Index "public.response_actions_pkey"
-  Column   |  Type  | Key? | Definition 
------------+--------+------+------------
- action_id | bigint | yes  | action_id
-primary key, btree, for table "public.response_actions"
-
-                                           Table "public.response_plans"
-   Column    |            Type             | Collation | Nullable |                     Default                     
--------------+-----------------------------+-----------+----------+-------------------------------------------------
- plan_id     | bigint                      |           | not null | nextval('response_plans_plan_id_seq'::regclass)
- incident_id | bigint                      |           | not null | 
- created_at  | timestamp without time zone |           | not null | CURRENT_TIMESTAMP
- priority    | character varying(20)       |           | not null | 
- reasoning   | text                        |           |          | 
- status      | character varying(20)       |           | not null | 'PROPOSED'::character varying
+Table "public.response_plans"
+      Column      |            Type             | Collation | Nullable |                     Default                     | Storage  | Compression | Stats target | Description
+------------------+-----------------------------+-----------+----------+-------------------------------------------------+----------+-------------+--------------+-------------
+ plan_id          | integer                     |           | not null | nextval('response_plans_plan_id_seq'::regclass) | plain    |             |              |
+ status           | character varying(20)       |           | not null |                                                 | extended |             |              |
+ created_at       | timestamp without time zone |           | not null | CURRENT_TIMESTAMP                               | plain    |             |              |
+ decided_at       | timestamp without time zone |           |          |                                                 | plain    |             |              |
+ plan_data        | jsonb                       |           | not null |                                                 | extended |             |              |
+ rejection_reason | text                        |           |          |                                                 | extended |             |              |
 Indexes:
     "response_plans_pkey" PRIMARY KEY, btree (plan_id)
-    "idx_response_plans_created_at" btree (created_at)
-    "idx_response_plans_incident_id" btree (incident_id)
 Check constraints:
-    "response_plans_priority_check" CHECK (priority::text = ANY (ARRAY['LOW'::character varying, 'MODERATE'::character varying, 'HIGH'::character varying, 'CRITICAL'::character varying]::text[]))
-    "response_plans_status_check" CHECK (status::text = ANY (ARRAY['PROPOSED'::character varying, 'APPROVED'::character varying, 'MODIFIED'::character varying, 'REJECTED'::character varying, 'SUPERSEDED'::character varying]::text[]))
-Foreign-key constraints:
-    "response_plans_incident_id_fkey" FOREIGN KEY (incident_id) REFERENCES incidents(incident_id)
-Referenced by:
-    TABLE "human_decisions" CONSTRAINT "human_decisions_plan_id_fkey" FOREIGN KEY (plan_id) REFERENCES response_plans(plan_id)
-    TABLE "response_actions" CONSTRAINT "response_actions_plan_id_fkey" FOREIGN KEY (plan_id) REFERENCES response_plans(plan_id) ON DELETE CASCADE
+    "response_plans_status_check" CHECK (status::text = ANY (ARRAY['PROPOSED'::character varying, 'APPROVED'::character varying, 'REJECTED'::character varying, 'SUPERSEDED'::character varying]::text[]))
+Not-null constraints:
+    "response_plans_plan_id_not_null" NOT NULL "plan_id"
+    "response_plans_status_not_null" NOT NULL "status"
+    "response_plans_created_at_not_null" NOT NULL "created_at"
+    "response_plans_plan_data_not_null" NOT NULL "plan_data"
+Access method: heap
 
-  Index "public.response_plans_pkey"
- Column  |  Type  | Key? | Definition 
----------+--------+------+------------
- plan_id | bigint | yes  | plan_id
-primary key, btree, for table "public.response_plans"
-
-                 Sequence "public.response_plans_plan_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.response_plans.plan_id
-
-                                          Table "public.response_teams"
-     Column      |         Type          | Collation | Nullable |                     Default                     
------------------+-----------------------+-----------+----------+-------------------------------------------------
- team_id         | integer               |           | not null | nextval('response_teams_team_id_seq'::regclass)
- team_code       | character varying(20) |           | not null | 
- team_type       | character varying(30) |           |          | 
- status          | character varying(20) |           |          | 
- current_ward_id | integer               |           |          | 
- geometry        | geometry(Point,4326)  |           |          | 
+able "public.response_teams"
+     Column      |         Type          | Collation | Nullable |                     Default                     | Storage  | Compression | Stats target | Description
+-----------------+-----------------------+-----------+----------+-------------------------------------------------+----------+-------------+--------------+-------------
+ team_id         | integer               |           | not null | nextval('response_teams_team_id_seq'::regclass) | plain    |             |              |
+ team_code       | character varying(20) |           | not null |                                                 | extended |             |              |
+ team_type       | character varying(30) |           |          |                                                 | extended |             |              |
+ status          | character varying(20) |           |          |                                                 | extended |             |              |
+ current_ward_id | integer               |           |          |                                                 | plain    |             |              |
+ geometry        | geometry(Point,4326)  |           |          |                                                 | main     |             |              |
 Indexes:
     "response_teams_pkey" PRIMARY KEY, btree (team_id)
     "response_teams_team_code_key" UNIQUE CONSTRAINT, btree (team_code)
 Foreign-key constraints:
     "response_teams_current_ward_id_fkey" FOREIGN KEY (current_ward_id) REFERENCES wards(ward_id)
-Referenced by:
-    TABLE "response_actions" CONSTRAINT "response_actions_team_id_fkey" FOREIGN KEY (team_id) REFERENCES response_teams(team_id)
+Not-null constraints:
+    "response_teams_team_id_not_null" NOT NULL "team_id"
+    "response_teams_team_code_not_null" NOT NULL "team_code"
+Access method: heap
 
-  Index "public.response_teams_pkey"
- Column  |  Type   | Key? | Definition 
----------+---------+------+------------
- team_id | integer | yes  | team_id
-primary key, btree, for table "public.response_teams"
 
-      Index "public.response_teams_team_code_key"
-  Column   |         Type          | Key? | Definition 
------------+-----------------------+------+------------
- team_code | character varying(20) | yes  | team_code
-unique, btree, for table "public.response_teams"
-
-             Sequence "public.response_teams_team_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.response_teams.team_id
-
-            Table "public.road_drainage"
-  Column  |  Type   | Collation | Nullable | Default 
-----------+---------+-----------+----------+---------
- road_id  | integer |           | not null | 
- drain_id | integer |           | not null | 
-Indexes:
-    "road_drainage_pkey" PRIMARY KEY, btree (road_id, drain_id)
-Foreign-key constraints:
-    "road_drainage_drain_id_fkey" FOREIGN KEY (drain_id) REFERENCES drainage(drain_id)
-    "road_drainage_road_id_fkey" FOREIGN KEY (road_id) REFERENCES roads(road_id)
-
-   Index "public.road_drainage_pkey"
-  Column  |  Type   | Key? | Definition 
-----------+---------+------+------------
- road_id  | integer | yes  | road_id
- drain_id | integer | yes  | drain_id
-primary key, btree, for table "public.road_drainage"
-
-                                         Table "public.roads"
-  Column   |           Type            | Collation | Nullable |                Default                 
------------+---------------------------+-----------+----------+----------------------------------------
- road_id   | integer                   |           | not null | nextval('roads_road_id_seq'::regclass)
- road_code | character varying(20)     |           | not null | 
- name      | character varying(100)    |           |          | 
- ward_id   | integer                   |           |          | 
- road_type | character varying(30)     |           |          | 
- width_m   | numeric(5,2)              |           |          | 
- geometry  | geometry(LineString,4326) |           |          | 
+Table "public.roads"
+  Column   |           Type            | Collation | Nullable |                Default                 | Storage  | Compression | Stats target | Description
+-----------+---------------------------+-----------+----------+----------------------------------------+----------+-------------+--------------+-------------
+ road_id   | integer                   |           | not null | nextval('roads_road_id_seq'::regclass) | plain    |             |              |
+ road_code | character varying(20)     |           | not null |                                        | extended |             |              |
+ name      | character varying(100)    |           |          |                                        | extended |             |              |
+ ward_id   | integer                   |           |          |                                        | plain    |             |              |
+ road_type | character varying(30)     |           |          |                                        | extended |             |              |
+ width_m   | numeric(5,2)              |           |          |                                        | main     |             |              |
+ geometry  | geometry(LineString,4326) |           |          |                                        | main     |             |              |
 Indexes:
     "roads_pkey" PRIMARY KEY, btree (road_id)
     "roads_road_code_key" UNIQUE CONSTRAINT, btree (road_code)
@@ -501,63 +232,23 @@ Foreign-key constraints:
     "roads_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
 Referenced by:
     TABLE "hotspots" CONSTRAINT "hotspots_road_id_fkey" FOREIGN KEY (road_id) REFERENCES roads(road_id)
-    TABLE "response_actions" CONSTRAINT "response_actions_road_id_fkey" FOREIGN KEY (road_id) REFERENCES roads(road_id)
     TABLE "road_drainage" CONSTRAINT "road_drainage_road_id_fkey" FOREIGN KEY (road_id) REFERENCES roads(road_id)
+Not-null constraints:
+    "roads_road_id_not_null" NOT NULL "road_id"
+    "roads_road_code_not_null" NOT NULL "road_code"
+Access method: heap
 
-       Index "public.roads_pkey"
- Column  |  Type   | Key? | Definition 
----------+---------+------+------------
- road_id | integer | yes  | road_id
-primary key, btree, for table "public.roads"
 
-          Index "public.roads_road_code_key"
-  Column   |         Type          | Key? | Definition 
------------+-----------------------+------+------------
- road_code | character varying(20) | yes  | road_code
-unique, btree, for table "public.roads"
-
-                 Sequence "public.roads_road_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.roads.road_id
-
-                    Table "public.spatial_ref_sys"
-  Column   |          Type           | Collation | Nullable | Default 
------------+-------------------------+-----------+----------+---------
- srid      | integer                 |           | not null | 
- auth_name | character varying(256)  |           |          | 
- auth_srid | integer                 |           |          | 
- srtext    | character varying(2048) |           |          | 
- proj4text | character varying(2048) |           |          | 
-Indexes:
-    "spatial_ref_sys_pkey" PRIMARY KEY, btree (srid)
-Check constraints:
-    "spatial_ref_sys_srid_check" CHECK (srid > 0 AND srid <= 998999)
-
- Index "public.spatial_ref_sys_pkey"
- Column |  Type   | Key? | Definition 
---------+---------+------+------------
- srid   | integer | yes  | srid
-primary key, btree, for table "public.spatial_ref_sys"
-
-             Composite type "public.valid_detail"
-  Column  |       Type        | Collation | Nullable | Default 
-----------+-------------------+-----------+----------+---------
- valid    | boolean           |           |          | 
- reason   | character varying |           |          | 
- location | geometry          |           |          | 
-
-                                          Table "public.wards"
-    Column     |          Type          | Collation | Nullable |                Default                 
----------------+------------------------+-----------+----------+----------------------------------------
- ward_id       | integer                |           | not null | nextval('wards_ward_id_seq'::regclass)
- ward_code     | character varying(10)  |           | not null | 
- name          | character varying(100) |           | not null | 
- population    | integer                |           |          | 
- area_sq_km    | numeric(8,2)           |           |          | 
- elevation_avg | numeric(6,2)           |           |          | 
- geometry      | geometry(Polygon,4326) |           |          | 
+Table "public.wards"
+    Column     |          Type          | Collation | Nullable |                Default                 | Storage  | Compression | Stats target | Description
+---------------+------------------------+-----------+----------+----------------------------------------+----------+-------------+--------------+-------------
+ ward_id       | integer                |           | not null | nextval('wards_ward_id_seq'::regclass) | plain    |             |              |
+ ward_code     | character varying(10)  |           | not null |                                        | extended |             |              |
+ name          | character varying(100) |           | not null |                                        | extended |             |              |
+ population    | integer                |           |          |                                        | plain    |             |              |
+ area_sq_km    | numeric(8,2)           |           |          |                                        | main     |             |              |
+ elevation_avg | numeric(6,2)           |           |          |                                        | main     |             |              |
+ geometry      | geometry(Polygon,4326) |           |          |                                        | main     |             |              |
 Indexes:
     "wards_pkey" PRIMARY KEY, btree (ward_id)
     "wards_ward_code_key" UNIQUE CONSTRAINT, btree (ward_code)
@@ -570,47 +261,26 @@ Referenced by:
     TABLE "rainfall" CONSTRAINT "rainfall_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
     TABLE "response_teams" CONSTRAINT "response_teams_current_ward_id_fkey" FOREIGN KEY (current_ward_id) REFERENCES wards(ward_id)
     TABLE "roads" CONSTRAINT "roads_ward_id_fkey" FOREIGN KEY (ward_id) REFERENCES wards(ward_id)
+Not-null constraints:
+    "wards_ward_id_not_null" NOT NULL "ward_id"
+    "wards_ward_code_not_null" NOT NULL "ward_code"
+    "wards_name_not_null" NOT NULL "name"
+Access method: heap
 
-       Index "public.wards_pkey"
- Column  |  Type   | Key? | Definition 
----------+---------+------+------------
- ward_id | integer | yes  | ward_id
-primary key, btree, for table "public.wards"
-
-          Index "public.wards_ward_code_key"
-  Column   |         Type          | Key? | Definition 
------------+-----------------------+------+------------
- ward_code | character varying(10) | yes  | ward_code
-unique, btree, for table "public.wards"
-
-                 Sequence "public.wards_ward_id_seq"
-  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache 
----------+-------+---------+------------+-----------+---------+-------
- integer |     1 |       1 | 2147483647 |         1 | no      |     1
-Owned by: public.wards.ward_id
-
-                                                     Table "public.water_levels"
-          Column          |            Type             | Collation | Nullable |                       Default                        
---------------------------+-----------------------------+-----------+----------+------------------------------------------------------
- measurement_id           | bigint                      |           | not null | nextval('water_levels_measurement_id_seq'::regclass)
- hotspot_id               | integer                     |           |          | 
- timestamp                | timestamp without time zone |           | not null | 
- water_level_m            | numeric(6,2)                |           |          | 
- rate_of_change_m_per_min | numeric(8,4)                |           |          | 
+Table "public.water_levels"
+          Column          |            Type             | Collation | Nullable |                       Default                        | Storage | Compression | Stats target | Description
+--------------------------+-----------------------------+-----------+----------+------------------------------------------------------+---------+-------------+--------------+-------------
+ measurement_id           | bigint                      |           | not null | nextval('water_levels_measurement_id_seq'::regclass) | plain   |             |              |
+ hotspot_id               | integer                     |           |          |                                                      | plain   |             |              |
+ timestamp                | timestamp without time zone |           | not null |                                                      | plain   |             |              |
+ water_level_m            | numeric(6,2)                |           |          |                                                      | main    |             |              |
+ rate_of_change_m_per_min | numeric(8,4)                |           |          |                                                      | main    |             |              |
 Indexes:
     "water_levels_pkey" PRIMARY KEY, btree (measurement_id)
 Foreign-key constraints:
     "water_levels_hotspot_id_fkey" FOREIGN KEY (hotspot_id) REFERENCES hotspots(hotspot_id)
-
-              Sequence "public.water_levels_measurement_id_seq"
-  Type  | Start | Minimum |       Maximum       | Increment | Cycles? | Cache 
---------+-------+---------+---------------------+-----------+---------+-------
- bigint |     1 |       1 | 9223372036854775807 |         1 | no      |     1
-Owned by: public.water_levels.measurement_id
-
-        Index "public.water_levels_pkey"
-     Column     |  Type  | Key? |   Definition   
-----------------+--------+------+----------------
- measurement_id | bigint | yes  | measurement_id
-primary key, btree, for table "public.water_levels"
+Not-null constraints:
+    "water_levels_measurement_id_not_null" NOT NULL "measurement_id"
+    "water_levels_timestamp_not_null" NOT NULL "timestamp"
+Access method: heap
 
