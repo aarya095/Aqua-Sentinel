@@ -15,10 +15,8 @@ def get_available_resources(
         """
         WITH incident_location AS (
             SELECT
-                h.geometry
+                i.geometry
             FROM incidents i
-            JOIN hotspots h
-                ON h.hotspot_id = i.hotspot_id
             WHERE i.incident_id = :incident_id
         )
 
