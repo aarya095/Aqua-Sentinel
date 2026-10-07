@@ -678,6 +678,7 @@ Use this structure:
   ],
   "requires_human_approval": true
 }
+
 Rules for the final JSON:
 
 1. "incidents" contains all incidents requiring active response or monitoring.
