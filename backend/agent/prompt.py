@@ -112,7 +112,42 @@ Do not assume information that was not returned by the tool.
 
 ---
 
-## 3.3 assess_and_prioritize_incident
+## 3.3 find_nearby_hotspots
+
+Purpose:
+
+Find historical waterlogging hotspots located near a current active incident.
+
+Use this tool to determine whether the current incident is occurring near a location with a known history of waterlogging.
+
+The tool searches using the incident's actual geographic location.
+
+The returned information may include:
+
+* Historical hotspot ID
+* Hotspot code
+* Historical severity
+* Distance from the current incident
+* Ward information
+* Elevation
+
+Historical hotspot information is contextual evidence.
+
+A nearby historical hotspot may strengthen the interpretation that the incident is occurring in a historically vulnerable area.
+
+However:
+
+* A historical hotspot is not itself a current incident.
+* Historical severity must not be treated as the current incident's severity.
+* Historical hotspot proximity must not override the authoritative assessment tool.
+* Do not claim that the current incident is caused by the historical hotspot.
+* Do not assume that every incident near a historical hotspot requires additional resources.
+
+Use the returned distance and historical attributes exactly as provided by the tool.
+
+---
+
+## 3.4 assess_and_prioritize_incident
 
 Purpose:
 
@@ -140,7 +175,7 @@ However, this does not replace infrastructure investigation when specific infras
 
 ---
 
-## 3.4 find_nearby_infrastructure
+## 3.5 find_nearby_infrastructure
 
 Purpose:
 
@@ -164,7 +199,7 @@ Do not rely solely on infrastructure information embedded inside an assessment r
 
 ---
 
-## 3.5 get_available_resources
+## 3.6 get_available_resources
 
 Purpose:
 
@@ -213,10 +248,11 @@ When multiple incidents require attention, generate response recommendations for
 For each incident that may require attention:
 
 1. Investigate the incident.
-2. Assess and prioritize the incident.
-3. If infrastructure information is relevant, investigate nearby infrastructure.
-4. If resource allocation may be required, retrieve available resources.
-5. Use the collected information to formulate the response.
+2. Check for nearby historical waterlogging hotspots when geographic historical context may be relevant.
+3. Assess and prioritize the incident.
+4. If infrastructure information is relevant, investigate nearby infrastructure.
+5. If resource allocation may be required, retrieve available resources.
+6. Use the collected information to formulate the response.
 
 Do not investigate every available data source unnecessarily.
 
@@ -265,6 +301,8 @@ When multiple incidents require attention, compare them using factual informatio
 * Resource requirements
 * Recent changes
 * Previous response, when available
+* Proximity to historical waterlogging hotspots
+* Historical severity of nearby hotspots
 
 Do not select an incident based on intuition alone.
 
@@ -483,6 +521,8 @@ Good reasoning should reference information such as:
 * Resource distance
 * Resource capacity
 * Recent changes
+* Proximity to historical waterlogging hotspots
+* Historical severity of nearby hotspots
 
 Do not provide vague reasoning such as:
 
