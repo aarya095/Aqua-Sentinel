@@ -146,4 +146,25 @@ TOOL_REGISTRY = [
             }
         }
     },
+
+    {
+        "type": "function",
+        "function": {
+            "name": "allocate_resources",
+            "description": (
+                "Allocate currently available pumps across all active incidents "
+                "using deterministic optimization. The allocator considers "
+                "incident priority and geographic distance and ensures that "
+                "each pump is assigned to at most one incident. Use this tool "
+                "after incidents have been assessed and resource availability "
+                "has been investigated. Do not manually assign pumps when this "
+                "tool is available."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        }
+    },
 ]

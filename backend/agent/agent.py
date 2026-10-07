@@ -11,6 +11,7 @@ from tools.find_nearby_infrastructure import find_nearby_infrastructure
 from tools.get_available_resources import get_available_resources
 from tools.assess_and_prioritize_incident import assess_and_prioritize_incident
 from tools.find_nearby_hotspots import find_nearby_hotspots
+from tools.allocate_resources import allocate_resources
 
 from database.session import SessionLocal
 
@@ -23,6 +24,7 @@ TOOL_FUNCTIONS = {
     "get_available_resources": get_available_resources,
     "assess_and_prioritize_incident": assess_and_prioritize_incident,
     "find_nearby_hotspots": find_nearby_hotspots,
+    "allocate_resources": allocate_resources,
 }
 
 
