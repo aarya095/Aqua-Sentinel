@@ -113,5 +113,37 @@ TOOL_REGISTRY = [
                 "required": ["incident_id"]
             }
         }
-    }
+    },
+
+    {
+        "type": "function",
+        "function": {
+            "name": "find_nearby_hotspots",
+            "description": (
+                "Find historical waterlogging hotspots near a current incident. "
+                "Use this to determine whether the incident is occurring near "
+                "a location with a known history of waterlogging. The search is "
+                "based on the incident's actual geographic location."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "incident_id": {
+                        "type": "string",
+                        "description": (
+                            "The current incident to search around."
+                        )
+                    },
+                    "radius_km": {
+                        "type": "number",
+                        "description": (
+                            "Search radius around the incident in kilometers."
+                        ),
+                        "default": 0.5
+                    }
+                },
+                "required": ["incident_id"]
+            }
+        }
+    },
 ]
