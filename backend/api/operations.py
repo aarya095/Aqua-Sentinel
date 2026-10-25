@@ -495,3 +495,72 @@ def reject_response_plan(
         "message": "Response plan rejected successfully",
         "plan": dict(result)
     }
+
+@router.get("/response-plan-history")
+def get_response_plan_history(db: Session = Depends(get_db)):
+    query = text("""
+        SELECT
+            plan_id,
+            status,
+            created_at,
+            decided_at,
+            plan_data,
+            rejection_reason
+        FROM response_plans
+        ORDER BY created_at DESC, plan_id DESC
+    """)
+
+    results = db.execute(query).mappings().all()
+
+    history = []
+
+    for result in results:
+        plan_data = result["plan_data"] or {}
+        incidents = plan_data.get("incidents", [])
+
+        high_priority_count = sum(
+            1
+            for incident in incidents
+            if incident.get("priority") == "HIGH"
+        )
+
+        critical_priority_count = sum(
+            1
+            for incident in incidents
+            if incident.get("priority") == "CRITICAL"
+        )
+
+        pumps_allocated = sum(
+            1
+            for incident in incidents
+            for action in incident.get("recommended_actions", [])
+            if action.get("action") == "Allocate pump"
+            and action.get("resource_id") is not None
+        )
+
+        teams_allocated = sum(
+            1
+            for incident in incidents
+            for action in incident.get("recommended_actions", [])
+            if action.get("action") == "Allocate response team"
+            and action.get("resource_id") is not None
+        )
+
+        history.append({
+            "plan_id": result["plan_id"],
+            "status": result["status"],
+            "created_at": result["created_at"],
+            "decided_at": result["decided_at"],
+            "plan_data": plan_data,
+            "incidents_assessed": len(incidents),
+            "high_priority_count": high_priority_count,
+            "critical_priority_count": critical_priority_count,
+            "pumps_allocated": pumps_allocated,
+            "teams_allocated": teams_allocated,
+            "rejection_reason": result["rejection_reason"],
+        })
+
+    return {
+        "total": len(history),
+        "history": history,
+    }
