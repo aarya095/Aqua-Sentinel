@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getLatestResponsePlan } from "../../api/api";
 import PrioritizedIncidents from "../../components/ai-control/PrioritizedIncidents";
 
-function AIResponseStatus() {
+function AIResponseStatus({ refreshKey }) {
   const navigate = useNavigate();
 
   const [plan, setPlan] = useState(null);
@@ -34,7 +34,7 @@ function AIResponseStatus() {
     }
 
     fetchLatestPlan();
-  }, []);
+}, [refreshKey]);
 
   /*
    * Determine the UI state from the persisted plan.
