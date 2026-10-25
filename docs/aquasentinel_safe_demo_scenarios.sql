@@ -166,6 +166,110 @@ INSERT INTO aquasentinel_demo_incidents(incident_id,scenario_key)
 SELECT incident_id,'RESOURCE_SHORTAGE' FROM inserted;
 COMMIT;
 
+INSERT INTO aquasentinel_demo_incidents(incident_id,scenario_key)
+SELECT incident_id,'COMPETING_PRIORITIES' FROM inserted;
+COMMIT;
+
+-- SCENARIO 7: DRAINAGE FAILURE VS RAINFALL (2 incidents)
+-- Test: modest rainfall but severe drainage blockage, versus a second incident
+-- with lower water level and slower rise. Agent should consider drainage risk.
+BEGIN;
+DELETE FROM incidents WHERE incident_id IN (SELECT incident_id FROM aquasentinel_demo_incidents);
+DELETE FROM aquasentinel_demo_incidents;
+UPDATE drainage SET condition='POOR',blocked_percentage=88.00,
+    current_flow_m3_hr=ROUND(COALESCE(capacity_m3_hr,100)::numeric*0.12,2);
+INSERT INTO rainfall(ward_id,timestamp,rainfall_mm_hr,source)
+SELECT ward_id,CURRENT_TIMESTAMP,18.00,'MANUAL_SCENARIO' FROM wards;
+INSERT INTO water_levels(hotspot_id,timestamp,water_level_m,rate_of_change_m_per_min)
+SELECT hotspot_id,CURRENT_TIMESTAMP,
+       CASE rn WHEN 1 THEN 1.05 WHEN 2 THEN 0.42 ELSE 0.16 END,
+       CASE rn WHEN 1 THEN 0.0230 WHEN 2 THEN 0.0040 ELSE 0.0000 END
+FROM (SELECT hotspot_id,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn FROM hotspots) h;
+UPDATE pumps SET status='AVAILABLE';
+UPDATE response_teams SET status='AVAILABLE';
+WITH chosen AS (
+ SELECT hotspot_id,geometry,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn
+ FROM hotspots WHERE geometry IS NOT NULL
+), inserted AS (
+ INSERT INTO incidents(hotspot_id,started_at,status,severity,affected_population,created_at,geometry)
+ SELECT hotspot_id,CURRENT_TIMESTAMP,'ACTIVE',
+        CASE WHEN rn=1 THEN 'HIGH' ELSE 'MODERATE' END,
+        CASE WHEN rn=1 THEN 520 ELSE 260 END,CURRENT_TIMESTAMP,geometry
+ FROM chosen WHERE rn<=2 RETURNING incident_id
+)
+INSERT INTO aquasentinel_demo_incidents(incident_id,scenario_key)
+SELECT incident_id,'DRAINAGE_VS_RAIN' FROM inserted;
+COMMIT;
+
+
+-- SCENARIO 8: SCARCE RESOURCES, THREE INCIDENTS (3 incidents)
+-- Test: only one available pump and one available team; agent should avoid
+-- recommending the same scarce resource for incompatible simultaneous tasks.
+BEGIN;
+DELETE FROM incidents WHERE incident_id IN (SELECT incident_id FROM aquasentinel_demo_incidents);
+DELETE FROM aquasentinel_demo_incidents;
+UPDATE drainage SET condition='POOR',blocked_percentage=55.00,
+    current_flow_m3_hr=ROUND(COALESCE(capacity_m3_hr,100)::numeric*0.35,2);
+INSERT INTO rainfall(ward_id,timestamp,rainfall_mm_hr,source)
+SELECT ward_id,CURRENT_TIMESTAMP,69.00,'MANUAL_SCENARIO' FROM wards;
+INSERT INTO water_levels(hotspot_id,timestamp,water_level_m,rate_of_change_m_per_min)
+SELECT hotspot_id,CURRENT_TIMESTAMP,
+       CASE rn WHEN 1 THEN 1.42 WHEN 2 THEN 1.16 WHEN 3 THEN 0.78 ELSE 0.32 END,
+       CASE rn WHEN 1 THEN 0.0280 WHEN 2 THEN 0.0180 WHEN 3 THEN 0.0130 ELSE 0.0020 END
+FROM (SELECT hotspot_id,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn FROM hotspots) h;
+UPDATE pumps SET status='DEPLOYED';
+UPDATE response_teams SET status='DEPLOYED';
+WITH first_pump AS (SELECT pump_id FROM pumps ORDER BY pump_id LIMIT 1)
+UPDATE pumps SET status='AVAILABLE' WHERE pump_id IN (SELECT pump_id FROM first_pump);
+WITH first_team AS (SELECT team_id FROM response_teams ORDER BY team_id LIMIT 1)
+UPDATE response_teams SET status='AVAILABLE' WHERE team_id IN (SELECT team_id FROM first_team);
+WITH chosen AS (
+ SELECT hotspot_id,geometry,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn
+ FROM hotspots WHERE geometry IS NOT NULL
+), inserted AS (
+ INSERT INTO incidents(hotspot_id,started_at,status,severity,affected_population,created_at,geometry)
+ SELECT hotspot_id,CURRENT_TIMESTAMP,'ACTIVE',
+        CASE rn WHEN 1 THEN 'CRITICAL' WHEN 2 THEN 'CRITICAL' ELSE 'HIGH' END,
+        CASE rn WHEN 1 THEN 900 WHEN 2 THEN 1450 ELSE 620 END,
+        CURRENT_TIMESTAMP,geometry
+ FROM chosen WHERE rn<=3 RETURNING incident_id
+)
+INSERT INTO aquasentinel_demo_incidents(incident_id,scenario_key)
+SELECT incident_id,'SCARCE_RESOURCES_3' FROM inserted;
+COMMIT;
+
+
+-- SCENARIO 9: RISING VS RECEDING WATER (2 incidents)
+-- Test: higher current water level but receding versus lower water level
+-- rising quickly. Agent should explain urgency using trend and exposure.
+BEGIN;
+DELETE FROM incidents WHERE incident_id IN (SELECT incident_id FROM aquasentinel_demo_incidents);
+DELETE FROM aquasentinel_demo_incidents;
+UPDATE drainage SET condition='FAIR',blocked_percentage=20.00,
+    current_flow_m3_hr=ROUND(COALESCE(capacity_m3_hr,100)::numeric*0.70,2);
+INSERT INTO rainfall(ward_id,timestamp,rainfall_mm_hr,source)
+SELECT ward_id,CURRENT_TIMESTAMP,38.00,'MANUAL_SCENARIO' FROM wards;
+INSERT INTO water_levels(hotspot_id,timestamp,water_level_m,rate_of_change_m_per_min)
+SELECT hotspot_id,CURRENT_TIMESTAMP,
+       CASE rn WHEN 1 THEN 1.12 WHEN 2 THEN 0.72 ELSE 0.18 END,
+       CASE rn WHEN 1 THEN -0.0140 WHEN 2 THEN 0.0320 ELSE 0.0000 END
+FROM (SELECT hotspot_id,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn FROM hotspots) h;
+UPDATE pumps SET status='AVAILABLE';
+UPDATE response_teams SET status='AVAILABLE';
+WITH chosen AS (
+ SELECT hotspot_id,geometry,ROW_NUMBER() OVER(ORDER BY hotspot_id) rn
+ FROM hotspots WHERE geometry IS NOT NULL
+), inserted AS (
+ INSERT INTO incidents(hotspot_id,started_at,status,severity,affected_population,created_at,geometry)
+ SELECT hotspot_id,CURRENT_TIMESTAMP,'ACTIVE',
+        CASE WHEN rn=1 THEN 'HIGH' ELSE 'MODERATE' END,
+        CASE WHEN rn=1 THEN 330 ELSE 780 END,CURRENT_TIMESTAMP,geometry
+ FROM chosen WHERE rn<=2 RETURNING incident_id
+)
+INSERT INTO aquasentinel_demo_incidents(incident_id,scenario_key)
+SELECT incident_id,'RISING_VS_RECEDING' FROM inserted;
+COMMIT;
+
 
 -- VERIFICATION QUERIES (run separately)
 -- Original incidents 11-16 should remain unchanged:
