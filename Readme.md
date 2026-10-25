@@ -24,7 +24,7 @@ AquaSentinel is an Agentic AI-based decision-support system designed to assist m
 ### AI Agent
 
 * **Local LLM Runtime:** Ollama
-* **Model:** Qwen3:4B
+* **Model:** gpt-oss:120b-cloud
 * **Purpose:** Local development and agent/tool-calling testing
 
 ### Database & GIS
