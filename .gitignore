@@ -1,17 +1,20 @@
-# ============================================================
-# Python & FastAPI
-# ============================================================
+# ==============================================================================
+# Python / FastAPI Backend
+# ==============================================================================
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
 
-# C extensions
-*.C
-
-# Distribution / packaging
-bin/
+# Environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+ENV/
+env/
+active_env/
 build/
 develop-eggs/
 dist/
@@ -30,103 +33,82 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-uwsgi.pid
-
-# Type checking
+# Inline tools and profiling
 .mypy_cache/
-.dmypy.json
-.dmypy.root/
 .pyre/
+.pytype/
+cython_debug/
+.pytest_cache/
 .ruff_cache/
+.ipycluster
+.ipynb_checkpoints
 
-# Virtual Environments
-venv/
-ENV/
-env/
-.env/
-.venv/
-
-# Local databases and logs
-*.sqlite3
-*.db
-*.log
-logs/
-
-# ============================================================
-# React & Node.js
-# ============================================================
-# Dependency directories
+# ==============================================================================
+# Frontend (React / Vite / JavaScript)
+# ==============================================================================
+# Dependencies
 node_modules/
-jspm_packages/
+/jspm_packages
 
-# TypeScript cache
-*.tsbuildinfo
+# Build outputs
+dist/
+dist-ssr/
+*.local
 
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
+# Vite / Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 .eslintcache
 
-# Optional stylelint cache
-.stylelintcache
+# ==============================================================================
+# AI Agent / Local LLM (Ollama & Qwen)
+# ==============================================================================
+# Ignore locally downloaded weights or model manifest templates if saved in-repo
+.ollama/
+models/
+*.gguf
+*.bin
 
-# Build outputs (Vite, CRA, Next, etc.)
-build/
-dist/
-.next/
-out/
+# ==============================================================================
+# Database, GIS, & Synthetic Data
+# ==============================================================================
+# Local database dumps and large GIS datasets
+*.sql
+*.sql.gz
+*.tar
+*.dump
+*.shp
+*.shx
+*.dbf
+*.prj
+*.geojson
+*.kml
+*.kmz
+# Synthetic generation caches
+data/synthetic/cache/
+*.log
 
-# Storybook build outputs
-.out
-.storybook-out
-
-# ============================================================
-# Environment Variables & Secrets
-# ============================================================
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# ============================================================
-# IDEs, Editors & Operating Systems
-# ============================================================
-# VS Code
-.vscode/*
+# ==============================================================================
+# IDEs, Editors & OS Systems
+# ==============================================================================
+# IDEs
+.vscode/
 !.vscode/settings.json
 !.vscode/extensions.json
-!.vscode/launch.json
-
-# JetBrains PyCharm / WebStorm / IntelliJ
 .idea/
-*.iml
-*.iws
-*.ipr
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# OS metadata
+# Operating Systems
 .DS_Store
 .DS_Store?
 ._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+ehthumbs.db
+Desktop.ini
