@@ -83,3 +83,13 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+@keyframes analysis-slide {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  100% {
+    transform: translateX(310%);
+  }
+}
