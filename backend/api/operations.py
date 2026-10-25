@@ -530,21 +530,26 @@ def get_response_plan_history(db: Session = Depends(get_db)):
             if incident.get("priority") == "CRITICAL"
         )
 
-        pumps_allocated = sum(
-            1
+        # Count distinct pumps recommended in the response plan.
+        pump_ids = {
+            action["resource_id"]
             for incident in incidents
             for action in incident.get("recommended_actions", [])
-            if action.get("action") == "Allocate pump"
-            and action.get("resource_id") is not None
-        )
+            if isinstance(action.get("resource_id"), str)
+            and action["resource_id"].upper().startswith("P")
+        }
 
-        teams_allocated = sum(
-            1
+        # Count distinct response teams recommended in the response plan.
+        team_ids = {
+            action["resource_id"]
             for incident in incidents
             for action in incident.get("recommended_actions", [])
-            if action.get("action") == "Allocate response team"
-            and action.get("resource_id") is not None
-        )
+            if isinstance(action.get("resource_id"), str)
+            and action["resource_id"].upper().startswith("T")
+        }
+
+        pumps_allocated = len(pump_ids)
+        teams_allocated = len(team_ids)
 
         history.append({
             "plan_id": result["plan_id"],
