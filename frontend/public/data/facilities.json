@@ -1,0 +1,114 @@
+[
+  {
+    "facility_id": 1,
+    "facility_code": "F001",
+    "name": "General Hospital",
+    "facility_type": "HOSPITAL",
+    "ward_id": 3,
+    "priority": "CRITICAL",
+    "capacity": 250,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.8955,
+        19.0475
+      ]
+    }
+  },
+  {
+    "facility_id": 2,
+    "facility_code": "F002",
+    "name": "Central Fire Station",
+    "facility_type": "FIRE_STATION",
+    "ward_id": 2,
+    "priority": "CRITICAL",
+    "capacity": 8,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.922,
+        19.067
+      ]
+    }
+  },
+  {
+    "facility_id": 3,
+    "facility_code": "F003",
+    "name": "Emergency Shelter",
+    "facility_type": "SHELTER",
+    "ward_id": 1,
+    "priority": "HIGH",
+    "capacity": 500,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.875,
+        19.078
+      ]
+    }
+  },
+  {
+    "facility_id": 4,
+    "facility_code": "F004",
+    "name": "Municipal School",
+    "facility_type": "SCHOOL",
+    "ward_id": 1,
+    "priority": "MEDIUM",
+    "capacity": 800,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.883,
+        19.067
+      ]
+    }
+  },
+  {
+    "facility_id": 5,
+    "facility_code": "F005",
+    "name": "Power Substation",
+    "facility_type": "POWER_STATION",
+    "ward_id": 4,
+    "priority": "HIGH",
+    "capacity": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.925,
+        19.027
+      ]
+    }
+  },
+  {
+    "facility_id": 6,
+    "facility_code": "F006",
+    "name": "Community Health Centre",
+    "facility_type": "HOSPITAL",
+    "ward_id": 4,
+    "priority": "HIGH",
+    "capacity": 80,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.915,
+        19.037
+      ]
+    }
+  },
+  {
+    "facility_id": 7,
+    "facility_code": "F007",
+    "name": "Water Treatment Plant",
+    "facility_type": "WATER_PLANT",
+    "ward_id": 4,
+    "priority": "CRITICAL",
+    "capacity": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.937,
+        19.018
+      ]
+    }
+  }
+]

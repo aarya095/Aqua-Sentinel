@@ -1,0 +1,674 @@
+[
+  {
+    "road_id": 1,
+    "road_code": "R001",
+    "name": "Local Road 1",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.008
+        ],
+        [
+          72.945,
+          19.008
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 2,
+    "road_code": "R002",
+    "name": "Collector Road 2",
+    "ward_id": 3,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.02
+        ],
+        [
+          72.945,
+          19.02
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 3,
+    "road_code": "R003",
+    "name": "Arterial Road 3",
+    "ward_id": 3,
+    "road_type": "ARTERIAL",
+    "width_m": 12,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.035
+        ],
+        [
+          72.945,
+          19.035
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 4,
+    "road_code": "R004",
+    "name": "Collector Road 4",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.05
+        ],
+        [
+          72.945,
+          19.05
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 5,
+    "road_code": "R005",
+    "name": "Arterial Road 5",
+    "ward_id": 2,
+    "road_type": "ARTERIAL",
+    "width_m": 12,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.065
+        ],
+        [
+          72.945,
+          19.065
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 6,
+    "road_code": "R006",
+    "name": "Collector Road 6",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.08
+        ],
+        [
+          72.945,
+          19.08
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 7,
+    "road_code": "R007",
+    "name": "Local Road 7",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.095
+        ],
+        [
+          72.945,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 8,
+    "road_code": "R008",
+    "name": "Local Avenue 8",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          18.995
+        ],
+        [
+          72.858,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 9,
+    "road_code": "R009",
+    "name": "Collector Avenue 9",
+    "ward_id": 3,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.872,
+          18.995
+        ],
+        [
+          72.872,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 10,
+    "road_code": "R010",
+    "name": "Arterial Avenue 10",
+    "ward_id": 3,
+    "road_type": "ARTERIAL",
+    "width_m": 12,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.887,
+          18.995
+        ],
+        [
+          72.887,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 11,
+    "road_code": "R011",
+    "name": "Collector Avenue 11",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.902,
+          18.995
+        ],
+        [
+          72.902,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 12,
+    "road_code": "R012",
+    "name": "Arterial Avenue 12",
+    "ward_id": 2,
+    "road_type": "ARTERIAL",
+    "width_m": 12,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.917,
+          18.995
+        ],
+        [
+          72.917,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 13,
+    "road_code": "R013",
+    "name": "Collector Avenue 13",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.932,
+          18.995
+        ],
+        [
+          72.932,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 14,
+    "road_code": "R014",
+    "name": "Local Avenue 14",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.944,
+          18.995
+        ],
+        [
+          72.944,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 15,
+    "road_code": "R015",
+    "name": "Local Connector 15",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.865,
+          19.014
+        ],
+        [
+          72.885,
+          19.014
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 16,
+    "road_code": "R016",
+    "name": "Local Connector 16",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.885,
+          19.014
+        ],
+        [
+          72.905,
+          19.014
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 17,
+    "road_code": "R017",
+    "name": "Local Connector 17",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.862,
+          19.028
+        ],
+        [
+          72.884,
+          19.028
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 18,
+    "road_code": "R018",
+    "name": "Local Connector 18",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.884,
+          19.028
+        ],
+        [
+          72.906,
+          19.028
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 19,
+    "road_code": "R019",
+    "name": "Local Connector 19",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.864,
+          19.043
+        ],
+        [
+          72.886,
+          19.043
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 20,
+    "road_code": "R020",
+    "name": "Local Connector 20",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.886,
+          19.043
+        ],
+        [
+          72.907,
+          19.043
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 21,
+    "road_code": "R021",
+    "name": "Local Connector 21",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.864,
+          19.058
+        ],
+        [
+          72.886,
+          19.058
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 22,
+    "road_code": "R022",
+    "name": "Local Connector 22",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.886,
+          19.058
+        ],
+        [
+          72.908,
+          19.058
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 23,
+    "road_code": "R023",
+    "name": "Local Connector 23",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.864,
+          19.073
+        ],
+        [
+          72.886,
+          19.073
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 24,
+    "road_code": "R024",
+    "name": "Local Connector 24",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.886,
+          19.073
+        ],
+        [
+          72.908,
+          19.073
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 25,
+    "road_code": "R025",
+    "name": "Local Connector 25",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.864,
+          19.088
+        ],
+        [
+          72.886,
+          19.088
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 26,
+    "road_code": "R026",
+    "name": "Local Connector 26",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.886,
+          19.088
+        ],
+        [
+          72.908,
+          19.088
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 27,
+    "road_code": "R027",
+    "name": "Local Connector 27",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.895,
+          19.01
+        ],
+        [
+          72.895,
+          19.026
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 28,
+    "road_code": "R028",
+    "name": "Local Connector 28",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.895,
+          19.026
+        ],
+        [
+          72.895,
+          19.042
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 29,
+    "road_code": "R029",
+    "name": "Local Connector 29",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.895,
+          19.047
+        ],
+        [
+          72.895,
+          19.063
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 30,
+    "road_code": "R030",
+    "name": "Local Connector 30",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.895,
+          19.064
+        ],
+        [
+          72.895,
+          19.08
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 31,
+    "road_code": "R031",
+    "name": "Local Connector 31",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.91,
+          19.022
+        ],
+        [
+          72.91,
+          19.038
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 32,
+    "road_code": "R032",
+    "name": "Local Connector 32",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.91,
+          19.037
+        ],
+        [
+          72.91,
+          19.053
+        ]
+      ]
+    }
+  }
+]

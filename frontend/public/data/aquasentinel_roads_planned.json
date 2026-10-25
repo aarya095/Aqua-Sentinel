@@ -1,0 +1,722 @@
+[
+  {
+    "road_id": 1,
+    "road_code": "R001",
+    "name": "North Boulevard",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 12.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.085
+        ],
+        [
+          72.945,
+          19.085
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 2,
+    "road_code": "R002",
+    "name": "Central Boulevard",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 14.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.055
+        ],
+        [
+          72.945,
+          19.055
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 3,
+    "road_code": "R003",
+    "name": "South Boulevard",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 12.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.02
+        ],
+        [
+          72.945,
+          19.02
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 4,
+    "road_code": "R004",
+    "name": "West Spine Avenue",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 11.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.875,
+          19.005
+        ],
+        [
+          72.875,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 5,
+    "road_code": "R005",
+    "name": "Central Spine Avenue",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 13.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.9,
+          19.005
+        ],
+        [
+          72.9,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 6,
+    "road_code": "R006",
+    "name": "East Spine Avenue",
+    "ward_id": null,
+    "road_type": "ARTERIAL",
+    "width_m": 11.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.928,
+          19.005
+        ],
+        [
+          72.928,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 7,
+    "road_code": "R007",
+    "name": "Northwest Collector",
+    "ward_id": 1,
+    "road_type": "COLLECTOR",
+    "width_m": 8.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.073
+        ],
+        [
+          72.875,
+          19.073
+        ],
+        [
+          72.895,
+          19.073
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 8,
+    "road_code": "R008",
+    "name": "Northeast Collector",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 8.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.905,
+          19.073
+        ],
+        [
+          72.928,
+          19.073
+        ],
+        [
+          72.945,
+          19.073
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 9,
+    "road_code": "R009",
+    "name": "Southwest Collector",
+    "ward_id": 3,
+    "road_type": "COLLECTOR",
+    "width_m": 8.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.855,
+          19.037
+        ],
+        [
+          72.875,
+          19.037
+        ],
+        [
+          72.895,
+          19.037
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 10,
+    "road_code": "R010",
+    "name": "Southeast Collector",
+    "ward_id": 4,
+    "road_type": "COLLECTOR",
+    "width_m": 8.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.905,
+          19.037
+        ],
+        [
+          72.928,
+          19.037
+        ],
+        [
+          72.945,
+          19.037
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 11,
+    "road_code": "R011",
+    "name": "West Cross Street",
+    "ward_id": 1,
+    "road_type": "COLLECTOR",
+    "width_m": 7.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.888,
+          19.055
+        ],
+        [
+          72.888,
+          19.075
+        ],
+        [
+          72.888,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 12,
+    "road_code": "R012",
+    "name": "East Cross Street",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 7.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.912,
+          19.055
+        ],
+        [
+          72.912,
+          19.075
+        ],
+        [
+          72.912,
+          19.095
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 13,
+    "road_code": "R013",
+    "name": "West South Collector",
+    "ward_id": 3,
+    "road_type": "COLLECTOR",
+    "width_m": 7.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.888,
+          19.005
+        ],
+        [
+          72.888,
+          19.02
+        ],
+        [
+          72.888,
+          19.037
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 14,
+    "road_code": "R014",
+    "name": "East South Collector",
+    "ward_id": 4,
+    "road_type": "COLLECTOR",
+    "width_m": 7.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.912,
+          19.005
+        ],
+        [
+          72.912,
+          19.02
+        ],
+        [
+          72.912,
+          19.037
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 15,
+    "road_code": "R015",
+    "name": "Northwest Link",
+    "ward_id": 1,
+    "road_type": "COLLECTOR",
+    "width_m": 6.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.092
+        ],
+        [
+          72.87,
+          19.082
+        ],
+        [
+          72.884,
+          19.073
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 16,
+    "road_code": "R016",
+    "name": "Northeast Link",
+    "ward_id": 2,
+    "road_type": "COLLECTOR",
+    "width_m": 6.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.916,
+          19.073
+        ],
+        [
+          72.93,
+          19.082
+        ],
+        [
+          72.942,
+          19.092
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 17,
+    "road_code": "R017",
+    "name": "Lakeview Street",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.064
+        ],
+        [
+          72.882,
+          19.064
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 18,
+    "road_code": "R018",
+    "name": "Garden Street",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.048
+        ],
+        [
+          72.882,
+          19.048
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 19,
+    "road_code": "R019",
+    "name": "Market Lane",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.031
+        ],
+        [
+          72.882,
+          19.031
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 20,
+    "road_code": "R020",
+    "name": "Hill Road",
+    "ward_id": 1,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.014
+        ],
+        [
+          72.882,
+          19.014
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 21,
+    "road_code": "R021",
+    "name": "Cedar Street",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.064
+        ],
+        [
+          72.942,
+          19.064
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 22,
+    "road_code": "R022",
+    "name": "Riverside Street",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.048
+        ],
+        [
+          72.942,
+          19.048
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 23,
+    "road_code": "R023",
+    "name": "Station Road",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.031
+        ],
+        [
+          72.942,
+          19.031
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 24,
+    "road_code": "R024",
+    "name": "Harbor Lane",
+    "ward_id": 2,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.014
+        ],
+        [
+          72.942,
+          19.014
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 25,
+    "road_code": "R025",
+    "name": "Orchid Street",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.044
+        ],
+        [
+          72.882,
+          19.044
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 26,
+    "road_code": "R026",
+    "name": "Civic Street",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.028
+        ],
+        [
+          72.882,
+          19.028
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 27,
+    "road_code": "R027",
+    "name": "Park Street",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.011
+        ],
+        [
+          72.882,
+          19.011
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 28,
+    "road_code": "R028",
+    "name": "Canal Road",
+    "ward_id": 3,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.858,
+          19.018
+        ],
+        [
+          72.87,
+          19.02
+        ],
+        [
+          72.882,
+          19.018
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 29,
+    "road_code": "R029",
+    "name": "Palm Street",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.044
+        ],
+        [
+          72.942,
+          19.044
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 30,
+    "road_code": "R030",
+    "name": "East Market Road",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.028
+        ],
+        [
+          72.942,
+          19.028
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 31,
+    "road_code": "R031",
+    "name": "Sunrise Street",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.011
+        ],
+        [
+          72.942,
+          19.011
+        ]
+      ]
+    }
+  },
+  {
+    "road_id": 32,
+    "road_code": "R032",
+    "name": "Waterfront Lane",
+    "ward_id": 4,
+    "road_type": "LOCAL",
+    "width_m": 5.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          72.918,
+          19.02
+        ],
+        [
+          72.93,
+          19.022
+        ],
+        [
+          72.942,
+          19.02
+        ]
+      ]
+    }
+  }
+]

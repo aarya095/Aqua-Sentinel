@@ -1,0 +1,98 @@
+[
+  {
+    "hotspot_id": 1,
+    "hotspot_code": "H001",
+    "ward_id": 3,
+    "road_id": 17,
+    "drain_id": 3,
+    "elevation_m": 6.2,
+    "historical_severity": "HIGH",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.893,
+        19.046
+      ]
+    }
+  },
+  {
+    "hotspot_id": 2,
+    "hotspot_code": "H002",
+    "ward_id": 2,
+    "road_id": 12,
+    "drain_id": 2,
+    "elevation_m": 7.1,
+    "historical_severity": "HIGH",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.925,
+        19.067
+      ]
+    }
+  },
+  {
+    "hotspot_id": 3,
+    "hotspot_code": "H003",
+    "ward_id": 4,
+    "road_id": 24,
+    "drain_id": 4,
+    "elevation_m": 7.4,
+    "historical_severity": "MEDIUM",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.923,
+        19.028
+      ]
+    }
+  },
+  {
+    "hotspot_id": 4,
+    "hotspot_code": "H004",
+    "ward_id": 1,
+    "road_id": 16,
+    "drain_id": 1,
+    "elevation_m": 10.2,
+    "historical_severity": "LOW",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.878,
+        19.075
+      ]
+    }
+  },
+  {
+    "hotspot_id": 5,
+    "hotspot_code": "H005",
+    "ward_id": 3,
+    "road_id": 20,
+    "drain_id": 5,
+    "elevation_m": 5.8,
+    "historical_severity": "HIGH",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.884,
+        19.02
+      ]
+    }
+  },
+  {
+    "hotspot_id": 6,
+    "hotspot_code": "H006",
+    "ward_id": 4,
+    "road_id": 27,
+    "drain_id": 4,
+    "elevation_m": 7.0,
+    "historical_severity": "MEDIUM",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        72.912,
+        19.041
+      ]
+    }
+  }
+]

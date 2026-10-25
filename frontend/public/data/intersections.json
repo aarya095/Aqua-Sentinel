@@ -1,0 +1,227 @@
+[
+  {
+    "intersection_id": 1,
+    "intersection_code": "J001",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.874599, 19.08698]
+    }
+  },
+  {
+    "intersection_id": 2,
+    "intersection_code": "J002",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.88745, 19.086004]
+    }
+  },
+  {
+    "intersection_id": 3,
+    "intersection_code": "J003",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.865086, 19.086504]
+    }
+  },
+  {
+    "intersection_id": 4,
+    "intersection_code": "J004",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.875676, 19.054054]
+    }
+  },
+  {
+    "intersection_id": 5,
+    "intersection_code": "J005",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.875027, 19.062162]
+    }
+  },
+  {
+    "intersection_id": 6,
+    "intersection_code": "J006",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.875842, 19.048026]
+    }
+  },
+  {
+    "intersection_id": 7,
+    "intersection_code": "J007",
+    "ward_id": 1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.899502, 19.08504]
+    }
+  },
+  {
+    "intersection_id": 8,
+    "intersection_code": "J008",
+    "ward_id": 2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.928409, 19.08683]
+    }
+  },
+  {
+    "intersection_id": 9,
+    "intersection_code": "J009",
+    "ward_id": 2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.91255, 19.086004]
+    }
+  },
+  {
+    "intersection_id": 10,
+    "intersection_code": "J010",
+    "ward_id": 2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.935377, 19.086481]
+    }
+  },
+  {
+    "intersection_id": 11,
+    "intersection_code": "J011",
+    "ward_id": 2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.928027, 19.062836]
+    }
+  },
+  {
+    "intersection_id": 12,
+    "intersection_code": "J012",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.927099, 19.048758]
+    }
+  },
+  {
+    "intersection_id": 13,
+    "intersection_code": "J013",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.874308, 19.018839]
+    }
+  },
+  {
+    "intersection_id": 14,
+    "intersection_code": "J014",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.899397, 19.017055]
+    }
+  },
+  {
+    "intersection_id": 15,
+    "intersection_code": "J015",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.888867, 19.018012]
+    }
+  },
+  {
+    "intersection_id": 16,
+    "intersection_code": "J016",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.87488, 19.036006]
+    }
+  },
+  {
+    "intersection_id": 17,
+    "intersection_code": "J017",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.874184, 19.027303]
+    }
+  },
+  {
+    "intersection_id": 18,
+    "intersection_code": "J018",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.874294, 19.019118]
+    }
+  },
+  {
+    "intersection_id": 19,
+    "intersection_code": "J019",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.928691, 19.018815]
+    }
+  },
+  {
+    "intersection_id": 20,
+    "intersection_code": "J020",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.911141, 19.017891]
+    }
+  },
+  {
+    "intersection_id": 21,
+    "intersection_code": "J021",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.928095, 19.03631]
+    }
+  },
+  {
+    "intersection_id": 22,
+    "intersection_code": "J022",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.927497, 19.043791]
+    }
+  },
+  {
+    "intersection_id": 23,
+    "intersection_code": "J023",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.928768, 19.027897]
+    }
+  },
+  {
+    "intersection_id": 24,
+    "intersection_code": "J024",
+    "ward_id": 4,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.92879, 19.020798]
+    }
+  },
+  {
+    "intersection_id": 25,
+    "intersection_code": "J025",
+    "ward_id": 3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.875526, 19.044079]
+    }
+  }
+]
