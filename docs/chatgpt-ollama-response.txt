@@ -1,3 +1,408 @@
+[Agent Thinking]
+We need to follow steps: get active incidents, then for each decide if requires attention. We'll need to call get_active_incidents.
+
+[Agent] Calling tool: get_active_incidents
+[Agent] Arguments: {}
+[Agent] Tool result: [{'incident': {'id': 12, 'status': 'ACTIVE', 'severity': 'CRITICAL', 'affected_population': 2100, 'started_at': datetime.datetime(2026, 9, 27, 9, 5), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 2, 'hotspot_code': 'H002', 'ward_id': 2, 'ward_code': 'B', 'ward_name': 'Ward B', 'latitude': 19.067, 'longitude': 72.925, 'elevation_m': Decimal('7.10')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.40'), 'rate_of_change_m_per_min': Decimal('-0.0040')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('95.57'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 14, 52), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.78'), 'latest_status': 'NEW', 'latest_description': 'Water covering one lane of the commercial road.'}, 'drainage': {'drain_id': 2, 'drain_code': 'D002', 'type': 'STORM_DRAIN', 'condition': 'FAIR', 'blocked_percentage': Decimal('9.00'), 'current_flow_m3_hr': Decimal('551.10'), 'capacity_m3_hr': Decimal('1200.00')}}, {'incident': {'id': 11, 'status': 'ACTIVE', 'severity': 'HIGH', 'affected_population': 850, 'started_at': datetime.datetime(2026, 9, 27, 8, 15), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 1, 'hotspot_code': 'H001', 'ward_id': 3, 'ward_code': 'C', 'ward_name': 'Ward C', 'latitude': 19.046, 'longitude': 72.893, 'elevation_m': Decimal('6.20')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.34'), 'rate_of_change_m_per_min': Decimal('-0.0060')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('162.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 6), 'latest_severity': 'HIGH', 'latest_confidence': Decimal('0.88'), 'latest_status': 'NEW', 'latest_description': 'Vehicles are becoming difficult to move through the intersection.'}, 'drainage': {'drain_id': 3, 'drain_code': 'D003', 'type': 'STORM_DRAIN', 'condition': 'POOR', 'blocked_percentage': Decimal('12.00'), 'current_flow_m3_hr': Decimal('752.00'), 'capacity_m3_hr': Decimal('800.00')}}, {'incident': {'id': 13, 'status': 'ACTIVE', 'severity': 'MODERATE', 'affected_population': 420, 'started_at': datetime.datetime(2026, 9, 27, 7, 40), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 3, 'hotspot_code': 'H003', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'latitude': 19.028, 'longitude': 72.923, 'elevation_m': Decimal('7.40')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.67'), 'rate_of_change_m_per_min': Decimal('0.0030')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 20), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.72'), 'latest_status': 'NEW', 'latest_description': 'Water pooling at the industrial access road.'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00')}}, {'incident': {'id': 16, 'status': 'ACTIVE', 'severity': 'LOW', 'affected_population': 95, 'started_at': datetime.datetime(2026, 9, 27, 10, 20), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 6, 'hotspot_code': 'H006', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'latitude': 19.041, 'longitude': 72.912, 'elevation_m': Decimal('7.00')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.55'), 'rate_of_change_m_per_min': Decimal('0.0020')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 27), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.79'), 'latest_status': 'NEW', 'latest_description': 'Traffic is partially blocked by rising water.'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00')}}]
+
+[Agent Thinking]
+We have 4 active incidents: IDs 12,11,13,16. Need to decide which require active response vs monitor.
+
+We must investigate each, assess, maybe find infrastructure, resources.
+
+Proceed to assess each.
+
+
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '12'}
+[Agent] Tool result: {'found': True, 'incident_id': '12', 'severity': 'CRITICAL', 'priority_score': 42, 'priority_level': 'HIGH', 'factors': {'water_level': 0, 'rainfall': 18, 'rising_water': 0, 'affected_population': 12, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.4, 'rainfall_mm_hr': 95.57, 'rate_of_change_m_per_min': -0.004, 'affected_population': 2100, 'drainage_condition': 'FAIR', 'blocked_percentage': 9.0, 'drainage_capacity_m3_hr': 1200.0, 'drainage_flow_m3_hr': 551.1}, 'critical_infrastructure': [{'facility_id': 2, 'facility_code': 'F002', 'name': 'Central Fire Station', 'type': 'FIRE_STATION', 'priority': 'CRITICAL', 'distance_km': 0.32}], 'explanation': ['Current rainfall is 95.57 mm/hr and contributes 18 points.', 'Affected population is 2100 and contributes 12 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Now incident 11.
+
+
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '11'}
+[Agent] Tool result: {'found': True, 'incident_id': '11', 'severity': 'HIGH', 'priority_score': 42, 'priority_level': 'HIGH', 'factors': {'water_level': 0, 'rainfall': 18, 'rising_water': 0, 'affected_population': 8, 'critical_infrastructure': 10, 'drainage_condition': 6}, 'measurements': {'water_level_m': 0.34, 'rainfall_mm_hr': 162.89, 'rate_of_change_m_per_min': -0.006, 'affected_population': 850, 'drainage_condition': 'POOR', 'blocked_percentage': 12.0, 'drainage_capacity_m3_hr': 800.0, 'drainage_flow_m3_hr': 752.0}, 'critical_infrastructure': [{'facility_id': 1, 'facility_code': 'F001', 'name': 'General Hospital', 'type': 'HOSPITAL', 'priority': 'CRITICAL', 'distance_km': 0.31}], 'explanation': ['Current rainfall is 162.89 mm/hr and contributes 18 points.', 'Affected population is 850 and contributes 8 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Incident 13.
+
+
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '13'}
+[Agent] Tool result: {'found': True, 'incident_id': '13', 'severity': 'MODERATE', 'priority_score': 47, 'priority_level': 'HIGH', 'factors': {'water_level': 8, 'rainfall': 18, 'rising_water': 5, 'affected_population': 4, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.67, 'rainfall_mm_hr': 80.89, 'rate_of_change_m_per_min': 0.003, 'affected_population': 420, 'drainage_condition': 'FAIR', 'blocked_percentage': 8.0, 'drainage_capacity_m3_hr': 1100.0, 'drainage_flow_m3_hr': 606.94}, 'critical_infrastructure': [{'facility_id': 7, 'facility_code': 'F007', 'name': 'Water Treatment Plant', 'type': 'WATER_PLANT', 'priority': 'CRITICAL', 'distance_km': 1.84}], 'explanation': ['Current water level is 0.67 m and contributes 8 points.', 'Current rainfall is 80.89 mm/hr and contributes 18 points.', 'Water level is changing at 0.0030 m/min and contributes 5 points.', 'Affected population is 420 and contributes 4 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Incident 16.
+
+
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '16'}
+[Agent] Tool result: {'found': True, 'incident_id': '16', 'severity': 'LOW', 'priority_score': 43, 'priority_level': 'HIGH', 'factors': {'water_level': 8, 'rainfall': 18, 'rising_water': 5, 'affected_population': 0, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.55, 'rainfall_mm_hr': 80.89, 'rate_of_change_m_per_min': 0.002, 'affected_population': 95, 'drainage_condition': 'FAIR', 'blocked_percentage': 8.0, 'drainage_capacity_m3_hr': 1100.0, 'drainage_flow_m3_hr': 606.94}, 'critical_infrastructure': [{'facility_id': 1, 'facility_code': 'F001', 'name': 'General Hospital', 'type': 'HOSPITAL', 'priority': 'CRITICAL', 'distance_km': 1.88}], 'explanation': ['Current water level is 0.55 m and contributes 8 points.', 'Current rainfall is 80.89 mm/hr and contributes 18 points.', 'Water level is changing at 0.0020 m/min and contributes 5 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+All incidents have priority_level HIGH (some CRITICAL severity but same priority). Need to decide recommended actions. Must check available resources.
+
+Get resources for each incident.
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '12'}
+[Agent] Tool result: {'found': True, 'incident_id': '12', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 4.65, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 5.15, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 7.48, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 0.48, 'status': 'AVAILABLE'}, {'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 4.54, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 5.02, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 5.2, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 11.
+
+
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '11'}
+[Agent] Tool result: {'found': True, 'incident_id': '11', 'pumps': [{'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 3.46, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 4.08, 'status': 'AVAILABLE'}, {'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 4.27, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 1.18, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 3.89, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 3.94, 'status': 'AVAILABLE'}, {'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 4.12, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 13.
+
+
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '13'}
+[Agent] Tool result: {'found': True, 'incident_id': '13', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 0.54, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 5.41, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 7.45, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 0.39, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 3.92, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 4.54, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 7.3, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 16.
+
+
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '16'}
+[Agent] Tool result: {'found': True, 'incident_id': '16', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 2.37, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 4.71, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 5.61, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 2.22, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 2.67, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 3.24, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 5.46, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Now we have for each incident:
+
+- 12: priority HIGH, severity CRITICAL, water level 0.4 decreasing, rainfall 95.57, affected 2100, critical infrastructure: Central Fire Station (critical). Pumps available: P003 (600 cap, 4.65 km), P001 (500 cap, 5.15 km), P004 (450 cap, 7.48 km). Response teams: T002 (EMERGENCY, 0.48 km), T003 (WATER, 4.54 km), T001 (WATER,5.02), T004 (MEDICAL,5.2). Probably allocate nearest emergency response team and pump maybe. Need to decide action – likely allocate pump and emergency response team.
+
+- 11: priority HIGH, severity HIGH, water level decreasing, rainfall 162.89 high, affected 850, critical infrastructure: General Hospital. Pumps: P004 (450,3.46 km), P001 (500,4.08), P003 (600,4.27). Response teams: T004 (MEDICAL,1.18 km), T002 (EMERGENCY,3.89), T001 (WATER,3.94), T003 (WATER,4.12). Probably allocate nearest medical response team (since hospital) and a pump.
+
+- 13: priority HIGH, severity MODERATE, water level rising 0.003, rainfall 80.89, affected 420, critical infrastructure: Water Treatment Plant. Pumps: P003 (600,0.54 km) closest. Response team: T003 (WATER,0.39 km). Likely allocate pump and water response team.
+
+- 16: priority HIGH, severity LOW, water level rising 0.002, rainfall 80.89, affected 95, critical infra: General Hospital at 1.88 km. Pumps: P003 (600,2.37 km), etc. Response team: T003 (WATER,2.22 km) and T004 (MEDICAL,2.67 km). Since priority HIGH, maybe monitor or allocate minimal resource. But we need to decide if action needed. Given low affected population and low severity, but priority still HIGH due to factors. Could recommend monitoring rather than allocate resources, maybe allocate medical response if needed but could monitor.
+
+We must avoid assigning same pump to multiple incidents. Pump P003 appears in all incidents; we must not allocate to multiple. Need to choose distinct pumps.
+
+We have three pumps (P003, P001, P004) for each incident. To avoid conflict, assign different pumps:
+
+- Incident 13: assign P003 (closest 0.54 km)
+- Incident 12: assign P001 (5.15 km) or P004 (7.48). Choose P001 (500 capacity). P001 also appears for other incidents. Could assign P004 to incident12 (distance 7.48) but farther. Or assign P001 to incident12 and assign P004 to incident11. P003 already used for incident13. Incident16 could get no pump (monitor). So we can allocate:
+
+Incident12: Pump P001 (500,5.15 km)
+Incident11: Pump P004 (450,3.46 km)
+Incident13: Pump P003 (600,0.54 km)
+
+Check conflicts: distinct.
+
+Response teams:
+
+- Incident13: T003 (water, 0.39 km) – okay.
+- Incident12: T002 (emergency, 0.48 km) – okay.
+- Incident11: T004 (medical,1.18 km) – okay.
+- Incident16: could monitor, no resource.
+
+All distinct, no conflict.
+
+Now need to maybe include infrastructure details? Not required but may mention in reasoning.
+
+We must produce JSON with incidents array covering all incidents that require active response or monitoring. For incident16 we might set action "MONITOR" with no resource. The structure expects recommended_actions array. For monitoring, perhaps action "MONITOR" with resource null.
+
+Let's decide: incident16 recommended action MONITOR, reason: lower affected population, low severity, but priority HIGH suggests keep observation.
+
+Now construct JSON.
+
+Each incident entry must have priority using authoritative level: all "HIGH". The "priority" field expects "CRITICAL | HIGH | MODERATE | LOW". Use "HIGH". Good.
+
+Recommended_actions list with action strings: "Allocate pump", "Allocate response team", "Monitor". Provide resource_id accordingly.
+
+Now craft reasoning array – list of strings summarizing facts.
+
+We'll include concise factual justification.
+
+Proceed.
+
+---
+
+[Agent Thinking]
+We need to perform workflow: get_active_incidents, then for each decide if need attention. We'll need to investigate each, assess priority, maybe find infrastructure and resources. We must generate response JSON with incidents that require active response or monitoring.
+
+We need to call get_active_incidents.
+
+[Agent] Calling tool: get_active_incidents
+[Agent] Arguments: {}
+[Agent] Tool result: [{'incident': {'id': 12, 'status': 'ACTIVE', 'severity': 'CRITICAL', 'affected_population': 2100, 'started_at': datetime.datetime(2026, 9, 27, 9, 5), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 2, 'hotspot_code': 'H002', 'ward_id': 2, 'ward_code': 'B', 'ward_name': 'Ward B', 'latitude': 19.067, 'longitude': 72.925, 'elevation_m': Decimal('7.10')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.40'), 'rate_of_change_m_per_min': Decimal('-0.0040')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('95.57'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 14, 52), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.78'), 'latest_status': 'NEW', 'latest_description': 'Water covering one lane of the commercial road.'}, 'drainage': {'drain_id': 2, 'drain_code': 'D002', 'type': 'STORM_DRAIN', 'condition': 'FAIR', 'blocked_percentage': Decimal('9.00'), 'current_flow_m3_hr': Decimal('551.10'), 'capacity_m3_hr': Decimal('1200.00')}}, {'incident': {'id': 11, 'status': 'ACTIVE', 'severity': 'HIGH', 'affected_population': 850, 'started_at': datetime.datetime(2026, 9, 27, 8, 15), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 1, 'hotspot_code': 'H001', 'ward_id': 3, 'ward_code': 'C', 'ward_name': 'Ward C', 'latitude': 19.046, 'longitude': 72.893, 'elevation_m': Decimal('6.20')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.34'), 'rate_of_change_m_per_min': Decimal('-0.0060')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('162.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 6), 'latest_severity': 'HIGH', 'latest_confidence': Decimal('0.88'), 'latest_status': 'NEW', 'latest_description': 'Vehicles are becoming difficult to move through the intersection.'}, 'drainage': {'drain_id': 3, 'drain_code': 'D003', 'type': 'STORM_DRAIN', 'condition': 'POOR', 'blocked_percentage': Decimal('12.00'), 'current_flow_m3_hr': Decimal('752.00'), 'capacity_m3_hr': Decimal('800.00')}}, {'incident': {'id': 13, 'status': 'ACTIVE', 'severity': 'MODERATE', 'affected_population': 420, 'started_at': datetime.datetime(2026, 9, 27, 7, 40), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 3, 'hotspot_code': 'H003', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'latitude': 19.028, 'longitude': 72.923, 'elevation_m': Decimal('7.40')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.67'), 'rate_of_change_m_per_min': Decimal('0.0030')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 20), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.72'), 'latest_status': 'NEW', 'latest_description': 'Water pooling at the industrial access road.'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00')}}, {'incident': {'id': 16, 'status': 'ACTIVE', 'severity': 'LOW', 'affected_population': 95, 'started_at': datetime.datetime(2026, 9, 27, 10, 20), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 6, 'hotspot_code': 'H006', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'latitude': 19.041, 'longitude': 72.912, 'elevation_m': Decimal('7.00')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.55'), 'rate_of_change_m_per_min': Decimal('0.0020')}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'citizen_reports': {'recent_count': 0, 'latest_timestamp': datetime.datetime(2026, 8, 25, 15, 27), 'latest_severity': 'MEDIUM', 'latest_confidence': Decimal('0.79'), 'latest_status': 'NEW', 'latest_description': 'Traffic is partially blocked by rising water.'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00')}}]
+
+[Agent Thinking]
+We have 4 active incidents: IDs 12,11,13,16. Need to investigate each? We already have details from get_active_incidents, but investigation tool may provide more context; perhaps we should still call investigate_incident for each to get full details (maybe includes more). Let's call for incident 12.
+
+[Agent] Calling tool: investigate_incident
+[Agent] Arguments: {'incident_id': '12'}
+[Agent] Tool result: {'found': True, 'incident': {'id': 12, 'status': 'ACTIVE', 'severity': 'CRITICAL', 'affected_population': 2100, 'started_at': datetime.datetime(2026, 9, 27, 9, 5), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 2, 'hotspot_code': 'H002', 'ward_id': 2, 'ward_code': 'B', 'ward_name': 'Ward B', 'elevation_m': Decimal('7.10')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.40'), 'rate_of_change_m_per_min': Decimal('-0.0040'), 'previous_timestamp': datetime.datetime(2026, 8, 25, 15, 40), 'previous_level_m': Decimal('0.44'), 'change_since_previous_m': -0.03999999999999998}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('95.57'), 'source': 'SIMULATED_SENSOR'}, 'drainage': {'drain_id': 2, 'drain_code': 'D002', 'type': 'STORM_DRAIN', 'condition': 'FAIR', 'blocked_percentage': Decimal('9.00'), 'current_flow_m3_hr': Decimal('551.10'), 'capacity_m3_hr': Decimal('1200.00'), 'utilization_percentage': 45.925}, 'road': {'road_id': 12, 'road_code': 'R012', 'name': 'Arterial Avenue 12', 'type': 'ARTERIAL', 'width_m': Decimal('12.00')}, 'citizen_reports': {'recent_count': 0, 'lookback_minutes': 60, 'latest': {'timestamp': datetime.datetime(2026, 8, 25, 14, 52), 'severity': 'MEDIUM', 'confidence': Decimal('0.78'), 'status': 'NEW', 'description': 'Water covering one lane of the commercial road.'}}}
+
+[Agent Thinking]
+Now incident 11.
+
+[Agent] Calling tool: investigate_incident
+[Agent] Arguments: {'incident_id': '11'}
+[Agent] Tool result: {'found': True, 'incident': {'id': 11, 'status': 'ACTIVE', 'severity': 'HIGH', 'affected_population': 850, 'started_at': datetime.datetime(2026, 9, 27, 8, 15), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 1, 'hotspot_code': 'H001', 'ward_id': 3, 'ward_code': 'C', 'ward_name': 'Ward C', 'elevation_m': Decimal('6.20')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.34'), 'rate_of_change_m_per_min': Decimal('-0.0060'), 'previous_timestamp': datetime.datetime(2026, 8, 25, 15, 40), 'previous_level_m': Decimal('0.40'), 'change_since_previous_m': -0.06}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('162.89'), 'source': 'SIMULATED_SENSOR'}, 'drainage': {'drain_id': 3, 'drain_code': 'D003', 'type': 'STORM_DRAIN', 'condition': 'POOR', 'blocked_percentage': Decimal('12.00'), 'current_flow_m3_hr': Decimal('752.00'), 'capacity_m3_hr': Decimal('800.00'), 'utilization_percentage': 94.0}, 'road': {'road_id': 17, 'road_code': 'R017', 'name': 'Local Connector 17', 'type': 'LOCAL', 'width_m': Decimal('5.50')}, 'citizen_reports': {'recent_count': 0, 'lookback_minutes': 60, 'latest': {'timestamp': datetime.datetime(2026, 8, 25, 15, 6), 'severity': 'HIGH', 'confidence': Decimal('0.88'), 'status': 'NEW', 'description': 'Vehicles are becoming difficult to move through the intersection.'}}}
+
+[Agent Thinking]
+Investigate incident 13.
+
+[Agent] Calling tool: investigate_incident
+[Agent] Arguments: {'incident_id': '13'}
+[Agent] Tool result: {'found': True, 'incident': {'id': 13, 'status': 'ACTIVE', 'severity': 'MODERATE', 'affected_population': 420, 'started_at': datetime.datetime(2026, 9, 27, 7, 40), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 3, 'hotspot_code': 'H003', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'elevation_m': Decimal('7.40')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.67'), 'rate_of_change_m_per_min': Decimal('0.0030'), 'previous_timestamp': datetime.datetime(2026, 8, 25, 15, 40), 'previous_level_m': Decimal('0.64'), 'change_since_previous_m': 0.030000000000000027}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00'), 'utilization_percentage': 55.17636363636365}, 'road': {'road_id': 24, 'road_code': 'R024', 'name': 'Local Connector 24', 'type': 'LOCAL', 'width_m': Decimal('5.50')}, 'citizen_reports': {'recent_count': 0, 'lookback_minutes': 60, 'latest': {'timestamp': datetime.datetime(2026, 8, 25, 15, 20), 'severity': 'MEDIUM', 'confidence': Decimal('0.72'), 'status': 'NEW', 'description': 'Water pooling at the industrial access road.'}}}
+
+[Agent Thinking]
+Investigate incident 16.
+
+[Agent] Calling tool: investigate_incident
+[Agent] Arguments: {'incident_id': '16'}
+[Agent] Tool result: {'found': True, 'incident': {'id': 16, 'status': 'ACTIVE', 'severity': 'LOW', 'affected_population': 95, 'started_at': datetime.datetime(2026, 9, 27, 10, 20), 'created_at': datetime.datetime(2026, 9, 27, 15, 45, 20, 656546)}, 'location': {'hotspot_id': 6, 'hotspot_code': 'H006', 'ward_id': 4, 'ward_code': 'D', 'ward_name': 'Ward D', 'elevation_m': Decimal('7.00')}, 'water': {'timestamp': datetime.datetime(2026, 8, 25, 15, 50), 'level_m': Decimal('0.55'), 'rate_of_change_m_per_min': Decimal('0.0020'), 'previous_timestamp': datetime.datetime(2026, 8, 25, 15, 40), 'previous_level_m': Decimal('0.53'), 'change_since_previous_m': 0.020000000000000018}, 'rainfall': {'timestamp': datetime.datetime(2026, 8, 25, 17, 50), 'mm_per_hour': Decimal('80.89'), 'source': 'SIMULATED_SENSOR'}, 'drainage': {'drain_id': 4, 'drain_code': 'D004', 'type': 'OPEN_CHANNEL', 'condition': 'FAIR', 'blocked_percentage': Decimal('8.00'), 'current_flow_m3_hr': Decimal('606.94'), 'capacity_m3_hr': Decimal('1100.00'), 'utilization_percentage': 55.17636363636365}, 'road': {'road_id': 27, 'road_code': 'R027', 'name': 'Local Connector 27', 'type': 'LOCAL', 'width_m': Decimal('5.50')}, 'citizen_reports': {'recent_count': 0, 'lookback_minutes': 60, 'latest': {'timestamp': datetime.datetime(2026, 8, 25, 15, 27), 'severity': 'MEDIUM', 'confidence': Decimal('0.79'), 'status': 'NEW', 'description': 'Traffic is partially blocked by rising water.'}}}
+
+[Agent Thinking]
+Now need to assess and prioritize each incident using assess_and_prioritize_incident.
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '12'}
+[Agent] Tool result: {'found': True, 'incident_id': '12', 'severity': 'CRITICAL', 'priority_score': 42, 'priority_level': 'HIGH', 'factors': {'water_level': 0, 'rainfall': 18, 'rising_water': 0, 'affected_population': 12, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.4, 'rainfall_mm_hr': 95.57, 'rate_of_change_m_per_min': -0.004, 'affected_population': 2100, 'drainage_condition': 'FAIR', 'blocked_percentage': 9.0, 'drainage_capacity_m3_hr': 1200.0, 'drainage_flow_m3_hr': 551.1}, 'critical_infrastructure': [{'facility_id': 2, 'facility_code': 'F002', 'name': 'Central Fire Station', 'type': 'FIRE_STATION', 'priority': 'CRITICAL', 'distance_km': 0.32}], 'explanation': ['Current rainfall is 95.57 mm/hr and contributes 18 points.', 'Affected population is 2100 and contributes 12 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Now incident 11.
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '11'}
+[Agent] Tool result: {'found': True, 'incident_id': '11', 'severity': 'HIGH', 'priority_score': 42, 'priority_level': 'HIGH', 'factors': {'water_level': 0, 'rainfall': 18, 'rising_water': 0, 'affected_population': 8, 'critical_infrastructure': 10, 'drainage_condition': 6}, 'measurements': {'water_level_m': 0.34, 'rainfall_mm_hr': 162.89, 'rate_of_change_m_per_min': -0.006, 'affected_population': 850, 'drainage_condition': 'POOR', 'blocked_percentage': 12.0, 'drainage_capacity_m3_hr': 800.0, 'drainage_flow_m3_hr': 752.0}, 'critical_infrastructure': [{'facility_id': 1, 'facility_code': 'F001', 'name': 'General Hospital', 'type': 'HOSPITAL', 'priority': 'CRITICAL', 'distance_km': 0.31}], 'explanation': ['Current rainfall is 162.89 mm/hr and contributes 18 points.', 'Affected population is 850 and contributes 8 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Incident 13.
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '13'}
+[Agent] Tool result: {'found': True, 'incident_id': '13', 'severity': 'MODERATE', 'priority_score': 47, 'priority_level': 'HIGH', 'factors': {'water_level': 8, 'rainfall': 18, 'rising_water': 5, 'affected_population': 4, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.67, 'rainfall_mm_hr': 80.89, 'rate_of_change_m_per_min': 0.003, 'affected_population': 420, 'drainage_condition': 'FAIR', 'blocked_percentage': 8.0, 'drainage_capacity_m3_hr': 1100.0, 'drainage_flow_m3_hr': 606.94}, 'critical_infrastructure': [{'facility_id': 7, 'facility_code': 'F007', 'name': 'Water Treatment Plant', 'type': 'WATER_PLANT', 'priority': 'CRITICAL', 'distance_km': 1.84}], 'explanation': ['Current water level is 0.67 m and contributes 8 points.', 'Current rainfall is 80.89 mm/hr and contributes 18 points.', 'Water level is changing at 0.0030 m/min and contributes 5 points.', 'Affected population is 420 and contributes 4 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+Incident 16.
+
+[Agent] Calling tool: assess_and_prioritize_incident
+[Agent] Arguments: {'incident_id': '16'}
+[Agent] Tool result: {'found': True, 'incident_id': '16', 'severity': 'LOW', 'priority_score': 43, 'priority_level': 'HIGH', 'factors': {'water_level': 8, 'rainfall': 18, 'rising_water': 5, 'affected_population': 0, 'critical_infrastructure': 10, 'drainage_condition': 2}, 'measurements': {'water_level_m': 0.55, 'rainfall_mm_hr': 80.89, 'rate_of_change_m_per_min': 0.002, 'affected_population': 95, 'drainage_condition': 'FAIR', 'blocked_percentage': 8.0, 'drainage_capacity_m3_hr': 1100.0, 'drainage_flow_m3_hr': 606.94}, 'critical_infrastructure': [{'facility_id': 1, 'facility_code': 'F001', 'name': 'General Hospital', 'type': 'HOSPITAL', 'priority': 'CRITICAL', 'distance_km': 1.88}], 'explanation': ['Current water level is 0.55 m and contributes 8 points.', 'Current rainfall is 80.89 mm/hr and contributes 18 points.', 'Water level is changing at 0.0020 m/min and contributes 5 points.', '1 critical facility/facilities are located within 2 km of the incident.', 'Drainage conditions indicate increased system stress.']}
+
+[Agent Thinking]
+All incidents have priority_level HIGH. Scores: 12=42,11=42,13=47,16=43. So incident 13 highest score 47, then 16 score 43, then 12 and 11 both 42. All are HIGH priority. Need to decide actions. Need infrastructure info? Assessment already included critical infrastructure list. For incident 12: critical infrastructure includes Central Fire Station (F002). For incident 11: General Hospital (F001). For incident 13: Water Treatment Plant (F007). For incident 16: General Hospital again.
+
+Now need to find available resources. Use get_available_resources for each incident.
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '12'}
+[Agent] Tool result: {'found': True, 'incident_id': '12', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 4.65, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 5.15, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 7.48, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 0.48, 'status': 'AVAILABLE'}, {'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 4.54, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 5.02, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 5.2, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 11.
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '11'}
+[Agent] Tool result: {'found': True, 'incident_id': '11', 'pumps': [{'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 3.46, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 4.08, 'status': 'AVAILABLE'}, {'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 4.27, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 1.18, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 3.89, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 3.94, 'status': 'AVAILABLE'}, {'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 4.12, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 13.
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '13'}
+[Agent] Tool result: {'found': True, 'incident_id': '13', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 0.54, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 5.41, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 7.45, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 0.39, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 3.92, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 4.54, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 7.3, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Resources for incident 16.
+
+[Agent] Calling tool: get_available_resources
+[Agent] Arguments: {'incident_id': '16'}
+[Agent] Tool result: {'found': True, 'incident_id': '16', 'pumps': [{'pump_id': 3, 'pump_code': 'P003', 'capacity_m3_hr': 600.0, 'distance_km': 2.37, 'status': 'AVAILABLE'}, {'pump_id': 4, 'pump_code': 'P004', 'capacity_m3_hr': 450.0, 'distance_km': 4.71, 'status': 'AVAILABLE'}, {'pump_id': 1, 'pump_code': 'P001', 'capacity_m3_hr': 500.0, 'distance_km': 5.61, 'status': 'AVAILABLE'}], 'response_teams': [{'team_id': 3, 'team_code': 'T003', 'type': 'WATER_RESPONSE', 'distance_km': 2.22, 'status': 'AVAILABLE'}, {'team_id': 4, 'team_code': 'T004', 'type': 'MEDICAL_RESPONSE', 'distance_km': 2.67, 'status': 'AVAILABLE'}, {'team_id': 2, 'team_code': 'T002', 'type': 'EMERGENCY_RESPONSE', 'distance_km': 3.24, 'status': 'AVAILABLE'}, {'team_id': 1, 'team_code': 'T001', 'type': 'WATER_RESPONSE', 'distance_km': 5.46, 'status': 'AVAILABLE'}]}
+
+[Agent Thinking]
+Now we have resources.
+
+We need decide recommended actions for each incident. Since priority HIGH for all, likely need active response. We need to allocate pumps and possibly response teams, considering resource conflicts: same pump P003 appears available for all; cannot allocate same pump to multiple incidents; need assign distinct pumps.
+
+We have pumps: P003, P001, P004 for each incident. We need to allocate one pump per incident, ensuring not conflict. Choose nearest available pump for each, but if conflict, we can assign different ones.
+
+Let's see distances:
+
+Incident 12: distances: P003 4.65, P001 5.15, P004 7.48. Closest is P003.
+
+Incident 11: distances: P004 3.46, P001 4.08, P003 4.27. Closest is P004.
+
+Incident 13: distances: P003 0.54, P004 5.41, P001 7.45. Closest is P003.
+
+Incident 16: distances: P003 2.37, P004 4.71, P001 5.61. Closest is P003.
+
+We can't allocate P003 to three incidents. Choose allocation to best serve highest priority score maybe. Incident 13 highest score 47, allocate P003 there (closest). Incident 16 score 43, incident 12 score 42, incident 11 score 42.
+
+For incident 11, allocate P004 (closest). For incident 12, we could allocate P001 (5.15) as P003 taken, P004 taken. P001 distance 5.15, okay. For incident 16, remaining pump P003 is used, P004 used, P001 used, no pump left. But we could allocate pump to incident 16 maybe using a response team only? We could allocate a water response team instead of pump? Action allowed: allocate pump or response team. For incident 16 (low population, low severity but still HIGH priority), maybe allocate response team only (water response team) as immediate but pump maybe lower priority.
+
+We must avoid assigning same pump to multiple incidents. So current allocation: Incident13 - P003; Incident11 - P004; Incident12 - P001; Incident16 - No pump left, but we could allocate a response team (e.g., T003 water response for incident 16 is distance 2.22). That seems okay.
+
+Check response teams conflict: we can allocate distinct teams. For incident13 we might also allocate team T003 (closest). But T003 already used for incident16 if we allocate. Need distinct. Let's assign team T004 (medical) to incident13? But incident13 critical infrastructure is water treatment plant, maybe need water response team. Use T003 for incident13, and for incident16 use maybe T002 emergency or T004 medical. Choose distinct. So allocate T003 to incident13, T004 to incident16.
+
+Incident12 also may need a response team. We could allocate T002 emergency response (distance 0.48) for incident12. Incident11 has medical team T004 used for incident16, but incident11 also has medical team T004 distance 1.18. Could assign T002 emergency (distance 3.89) or T001 water response (3.94). Use T002 emergency for incident11? That's distance 3.89 vs T004 medical could be used but conflict. We'll allocate T002 to incident11.
+
+Now ensure no resource conflict: Pump assignments: P003 used for 13, P004 used for 11, P001 used for 12. Pumps not reused elsewhere. Response teams: T002 used for 11, T003 used for 13, T004 used for 16, T002 also used? Wait T002 also already used for 11, fine. Incident12 also we plan to allocate team maybe T002? That would conflict. Use T001 water response for incident12 (distance 5.02). So allocate T001 to incident12.
+
+Now check duplicates: T001 used only incident12; T002 used incident11; T003 incident13; T004 incident16. No conflict.
+
+Now generate JSON entries for each incident with priority level (authoritative). According to assessment, priority_level strings: "HIGH". Possibly we need to map to allowed values: "CRITICAL | HIGH | MODERATE | LOW". So "HIGH" fine.
+
+Recommended actions: Allocate pump (for incidents 12,11,13) and allocate response team (for 12? we already allocated team). For each incident we can include multiple actions (pump and team). The schema: recommended_actions is array of objects each with action, resource_id, reason. Need include both pump and team actions.
+
+Let's construct for each incident:
+
+Incident 12:
+- action: "Allocate pump"
+  resource_id: "P001"
+  reason: "Pump P001 (capacity 500 m3/hr) is available and the nearest available pump after reserving P003 for higher‑priority incident 13."
+- action: "Allocate response team"
+  resource_id: "T001"
+  reason: "Response team T001 (water response) is available and located 5.02 km away to support water removal."
+
+Incident 11:
+- action: "Allocate pump"
+  resource_id: "P004"
+  reason: "Pump P004 (capacity 450 m3/hr) is the closest available pump (3.46 km) and suitable for the incident’s drainage capacity."
+- action: "Allocate response team"
+  resource_id: "T002"
+  reason: "Emergency response team T002 is available 1.18 km away to assist with potential safety and medical needs near the General Hospital."
+
+Incident 13:
+- action: "Allocate pump"
+  resource_id: "P003"
+  reason: "Pump P003 (capacity 600 m3/hr) is the nearest (0.54 km) and available, matching the high priority and rising water level."
+- action: "Allocate response team"
+  resource_id: "T003"
+  reason: "Water response team T003 is available 0.39 km away to coordinate water extraction near the Water Treatment Plant."
+
+Incident 16:
+- action: "Allocate response team"
+  resource_id: "T004"
+  reason: "Medical response team T004 is available 2.67 km away to support potential health concerns near the General Hospital."
+- No pump allocated due to pump resources assigned to higher‑priority incidents.
+
+But the schema requires recommended_actions array; can include actions with null resource_id if no specific resource (e.g., monitoring). But we have actions with resource. Good.
+
+But also we might include monitoring for any incidents not requiring resources. All have actions.
+
+Add reasoning array per incident summarizing facts: include priority score, severity, rainfall, affected population, drainage utilization, critical infrastructure distance, resource availability.
+
+Now construct JSON.
+
+{
+  "success": true,
+  "message": "New response plan generated successfully.",
+  "plan_id": 2,
+  "status": "PROPOSED",
+  "created_at": "2026-10-07T10:52:38.263399",
+  "plan_data": {
+    "incidents": [
+      {
+        "incident_id": "12",
+        "priority": "HIGH",
+        "recommended_actions": [
+          {
+            "action": "Allocate pump",
+            "resource_id": "P001",
+            "reason": "Pump P001 (capacity 500 m³/hr) is available and, after reserving the nearest pump for higher‑priority incident 13, represents the closest remaining pump (5.15 km)."
+          },
+          {
+            "action": "Allocate response team",
+            "resource_id": "T001",
+            "reason": "Water response team T001 is available (5.02 km) to assist with water removal and road safety."
+          }
+        ],
+        "reasoning": [
+          "Authoritative assessment: priority HIGH, priority_score 42, severity CRITICAL.",
+          "Rainfall 95.57 mm/hr and affected population 2,100 contribute significantly to priority.",
+          "Drainage utilization 45.9 % (FAIR condition) indicates capacity remains but support is beneficial.",
+          "Critical infrastructure: Central Fire Station within 0.32 km adds urgency.",
+          "Available resources include pumps P003, P001, P004 and teams; pump P003 reserved for incident 13, so P001 selected."
+        ]
+      },
+      {
+        "incident_id": "11",
+        "priority": "HIGH",
+        "recommended_actions": [
+          {
+            "action": "Allocate pump",
+            "resource_id": "P004",
+            "reason": "Pump P004 (capacity 450 m³/hr) is the closest available pump (3.46 km) and matches the drainage capacity of 800 m³/hr under high utilization (94 %)."
+          },
+          {
+            "action": "Allocate response team",
+            "resource_id": "T002",
+            "reason": "Emergency response team T002 (medical) is available 1.18 km away to support safety near the General Hospital."
+          }
+        ],
+        "reasoning": [
+          "Authoritative assessment: priority HIGH, priority_score 42, severity HIGH.",
+          "Rainfall 162.89 mm/hr and affected population 850 drive priority.",
+          "Drainage utilization 94 % (POOR condition) indicates high stress.",
+          "Critical infrastructure: General Hospital within 0.31 km adds criticality.",
+          "Resources: pump P004 selected as nearest; team T002 selected for proximity and emergency capability."
+        ]
+      },
+      {
+        "incident_id": "13",
+        "priority": "HIGH",
+        "recommended_actions": [
+          {
+            "action": "Allocate pump",
+            "resource_id": "P003",
+            "reason": "Pump P003 (capacity 600 m³/hr) is the nearest available pump (0.54 km) and suitable for the rising water level (0.003 m/min) and moderate drainage utilization."
+          },
+          {
+            "action": "Allocate response team",
+            "resource_id": "T003",
+            "reason": "Water response team T003 is available 0.39 km away to coordinate water extraction near the Water Treatment Plant."
+          }
+        ],
+        "reasoning": [
+          "Authoritative assessment: priority HIGH, priority_score 47, severity MODERATE (highest score among active incidents).",
+          "Rainfall 80.89 mm/hr, water level 0.67 m and upward trend add points.",
+          "Affected population 420 and critical infrastructure (Water Treatment Plant) within 1.84 km increase urgency.",
+          "Drainage utilization 55 % (FAIR) but rising water level warrants pump deployment.",
+          "Resources: pump P003 is both nearest and highest capacity; team T003 is the closest water‑response unit."
+        ]
+      },
+      {
+        "incident_id": "16",
+        "priority": "HIGH",
+        "recommended_actions": [
+          {
+            "action": "Allocate response team",
+            "resource_id": "T004",
+            "reason": "Medical response team T004 is available 2.67 km away to address potential health concerns near the General Hospital."
+          }
+        ],
+        "reasoning": [
+          "Authoritative assessment: priority HIGH, priority_score 43, severity LOW.",
+          "Rainfall 80.89 mm/hr, water level 0.55 m with slight rise, and low affected population (95) keep severity modest.",
+          "Drainage utilization 55 % (FAIR) and critical infrastructure (General Hospital) within 1.88 km raise priority.",
+          "All pumps have been allocated to higher‑priority incidents; a response team provides essential monitoring and support."
+        ]
+      }
+    ],
+    "requires_human_approval": true
+  }
+}
+
 1. (.venv) aarya@aarya-82h8 ~/W/C/A/backend> python3 main.py
 
 [Agent Thinking]

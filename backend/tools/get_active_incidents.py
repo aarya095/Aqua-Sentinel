@@ -71,8 +71,8 @@ def get_active_incidents(
             w.ward_code,
             w.name AS ward_name,
 
-            ST_Y(h.geometry) AS latitude,
-            ST_X(h.geometry) AS longitude,
+            ST_Y(i.geometry) AS latitude,
+            ST_X(i.geometry) AS longitude,
 
             lw.water_timestamp,
             lw.water_level_m,
