@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { runNewAnalysis } from "../../api/api";
 
-function NewAnalysisPanel() {
+function NewAnalysisPanel({ onAnalysisCompleted }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const handleStartAnalysis = async () => {
-    
-    setShowConfirmation(false);
-    setIsAnalyzing(true);
+  setShowConfirmation(false);
+  setIsAnalyzing(true);
 
-    try {
-      const result = await runNewAnalysis();
+  try {
+    const result = await runNewAnalysis();
 
-      console.log("New analysis completed:", result);
+    console.log("New analysis completed:", result);
 
-      // The latest response plan is now stored in the database.
-      // Other components can retrieve it using the plan_id.
-    } catch (error) {
-      console.error("Analysis failed:", error);
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
+    // Notify the parent that a new analysis has completed.
+    onAnalysisCompleted?.();
+
+  } catch (error) {
+    console.error("Analysis failed:", error);
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   return (
     <>
