@@ -13,6 +13,13 @@ function Operations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Incremented whenever a new analysis completes.
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleAnalysisCompleted = () => {
+    setRefreshKey((previous) => previous + 1);
+  };
+
   useEffect(() => {
     async function loadOperationsSummary() {
       try {
@@ -63,12 +70,16 @@ function Operations() {
 
       <div>
         <CityMap />
-        <NewAnalysisPanel />
+
+        <NewAnalysisPanel
+          onAnalysisCompleted={handleAnalysisCompleted}
+        />
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <ActiveIncidentsPanel />
-        <AIResponseStatus />
+
+        <AIResponseStatus refreshKey={refreshKey} />
       </div>
     </div>
   );
