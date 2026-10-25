@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { runNewAnalysis } from "../../api/api";
+import AnalysisAnimation from "./AnalysisAnimation";
 
 function NewAnalysisPanel({ onAnalysisCompleted }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -67,22 +68,8 @@ function NewAnalysisPanel({ onAnalysisCompleted }) {
           </div>
         </div>
 
-        {/* Analysis Progress */}
-        {isAnalyzing && (
-          <div className="mt-5 border-t border-slate-800 pt-4">
-            <div className="flex items-center gap-3">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-blue-400" />
-
-              <p className="text-xs font-medium text-blue-400">
-                AI agent is assessing the current city-wide situation...
-              </p>
-            </div>
-
-            <p className="mt-2 text-xs text-slate-500">
-              Observe → Investigate → Assess → Prioritize → Generate Plan
-            </p>
-          </div>
-        )}
+        {/* Animated Analysis Progress */}
+          {isAnalyzing && <AnalysisAnimation />}
       </section>
 
       {/* Confirmation Modal */}
